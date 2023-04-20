@@ -1,12 +1,6 @@
+import uuid
 from django.db import models
 from django.utils import timezone
-from django.utils.translation import gettext_lazy as _
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
-
-
-from django.db import models
-from django.utils import timezone
-from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 
 
@@ -68,15 +62,42 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.user_name or self.email
 
+import uuid
+from django.db import models
+
+class ShortUUIDField(models.UUIDField):
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault('editable', False)
+        kwargs.setdefault('default', uuid.uuid4)
+        kwargs.setdefault('unique', True)
+        kwargs.setdefault('max_length', 5)
+        super().__init__(*args, **kwargs)
+
+    def to_python(self, value):
+        if value is None:
+            return value
+        elif isinstance(value, uuid.UUID):
+            return str(value).replace('-', '')[:self.max_length]
+        elif isinstance(value, str):
+            return value.replace('-', '')[:self.max_length]
+        else:
+            raise ValueError('Invalid UUID value: {!r}'.format(value))
+
+    def from_db_value(self, value, expression, connection):
+        if value is None:
+            return value
+        elif isinstance(value, uuid.UUID):
+            return str(value).replace('-', '')[:self.max_length]
+        elif isinstance(value, str):
+            return value.replace('-', '')[:self.max_length]
+        else:
+            raise ValueError('Invalid UUID value: {!r}'.format(value))
+
 class Consultant(NewUser):
-    matricule = models.CharField(max_length=10)
+    matricule = ShortUUIDField()
 
     class Meta:
         db_table = "Consultants"
-    def get_absolute_url(self):
-        return '/consultant/list'
-
-
 
 class Customer(NewUser):
     consultant_applied = models.ForeignKey(Consultant, on_delete=models.CASCADE, null=True, blank=True)
