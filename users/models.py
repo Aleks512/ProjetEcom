@@ -44,7 +44,7 @@ class CustomAccountManager(BaseUserManager):
         return self.create_user(email, password, **extra_fields)
 
 class NewUser(AbstractBaseUser, PermissionsMixin):
-    user_name = models.CharField(max_length=150, unique=True)
+    user_name = models.CharField(max_length=150, unique=True, )
     email = models.EmailField(_('Email'),unique=True, blank=False, max_length=255)
     first_name = models.CharField(_("Prénom"), max_length=100)
     last_name = models.CharField(_("Nom de famille"), max_length=50)
@@ -52,6 +52,7 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     is_client = models.BooleanField(default=False)
+    is_employee = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     date_joined = models.DateTimeField(default=timezone.now)
 
