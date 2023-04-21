@@ -4,7 +4,7 @@ from .forms import ConsultantCreationForm
 from .models import Consultant
 
 class ConsultantCreateView(CreateView):
-    template_name = 'consultant_create.html'
+    template_name = 'users/consultant_create.html'
     form_class = ConsultantCreationForm
     success_url = reverse_lazy('consultant_list')
     model = Consultant

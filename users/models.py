@@ -1,4 +1,5 @@
-import uuid
+import random
+import string
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
@@ -63,39 +64,18 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.user_name or self.email
 
-import uuid
-from django.db import models
-
-class ShortUUIDField(models.UUIDField):
-    def __init__(self, *args, **kwargs):
-        kwargs.setdefault('editable', False)
-        kwargs.setdefault('default', uuid.uuid4)
-        kwargs.setdefault('unique', True)
-        kwargs.setdefault('max_length', 5)
-        super().__init__(*args, **kwargs)
-
-    def to_python(self, value):
-        if value is None:
-            return value
-        elif isinstance(value, uuid.UUID):
-            return str(value).replace('-', '')[:self.max_length]
-        elif isinstance(value, str):
-            return value.replace('-', '')[:self.max_length]
-        else:
-            raise ValueError('Invalid UUID value: {!r}'.format(value))
-
-    def from_db_value(self, value, expression, connection):
-        if value is None:
-            return value
-        elif isinstance(value, uuid.UUID):
-            return str(value).replace('-', '')[:self.max_length]
-        elif isinstance(value, str):
-            return value.replace('-', '')[:self.max_length]
-        else:
-            raise ValueError('Invalid UUID value: {!r}'.format(value))
-
 class Consultant(NewUser):
-    matricule = ShortUUIDField()
+
+    MATRICULE_LENGTH = 5
+
+    matricule = models.CharField(_("matricule"),max_length=MATRICULE_LENGTH, unique=True, editable=False)
+
+    def generate_random_matricule(self):
+        return ''.join(random.choices(string.ascii_uppercase + string.digits, k=self.MATRICULE_LENGTH))
+    def save(self, *args, **kwargs):
+        if not self.matricule:
+            self.matricule = self.generate_random_matricule()
+        super().save(*args, **kwargs)
 
     class Meta:
         db_table = "Consultants"
