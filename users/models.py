@@ -3,8 +3,6 @@ import string
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
-
-
 from django.contrib.auth.base_user import BaseUserManager
 from django.utils.translation import gettext_lazy as _
 
@@ -62,31 +60,38 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['company']
     def __str__(self):
-        return self.user_name or self.email
+        return self.email or self.user_name
 
 class Consultant(NewUser):
 
     MATRICULE_LENGTH = 5
 
-    matricule = models.CharField(_("matricule"),max_length=MATRICULE_LENGTH, unique=True, editable=False)
+    matricule = models.CharField(_("matricule"),max_length=MATRICULE_LENGTH, unique=True)
 
     def generate_random_matricule(self):
         return ''.join(random.choices(string.ascii_uppercase + string.digits, k=self.MATRICULE_LENGTH))
+
     def save(self, *args, **kwargs):
         if not self.matricule:
-            self.matricule = self.generate_random_matricule()
+            while True:
+                matricule = self.generate_random_matricule()
+                if not Consultant.objects.filter(matricule=matricule).exists():
+                    self.matricule = matricule
+                    break
         super().save(*args, **kwargs)
 
     class Meta:
         db_table = "Consultants"
+    def get_absolute_url(self):
+        return '/consultant/list'
+
 
 class Customer(NewUser):
     consultant_applied = models.ForeignKey(Consultant, on_delete=models.CASCADE, null=True, blank=True)
 
     class Meta:
         db_table = "Customers"
-    def get_absolute_url(self):
-        return '/consultant/list'
+
 
 
 

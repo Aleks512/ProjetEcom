@@ -1,6 +1,7 @@
+
 from django.test import TestCase
 from django.contrib.auth import get_user_model
-from .models import CustomAccountManager, NewUser, Consultant, Customer
+from .models import  Consultant
 
 
 class UserAccountTests(TestCase):
@@ -28,27 +29,31 @@ class UserAccountTests(TestCase):
                 email='', password='password', is_superuser=True)
 
 
-class CustomAccountManagerTestCase(TestCase):
-    def test_create_user(self):
-        User = get_user_model()
-        email = 'test@example.com'
-        password = 'testpassword'
-        company = 'Test Company'
 
-        # Create a new user
-        user = User.objects.create_user(
-            email=email,
-            password=password,
-            company=company,
+
+class ConsultantModelTest(TestCase):
+    def setUp(self):
+        self.consultant = Consultant.objects.create(
+            user_name='testuser',
+            email='test@example.com',
+            first_name='Test',
+            last_name='User',
+            company='Test Company'
         )
 
-        # Check that the user was created
-        self.assertIsNotNone(user)
+    def test_generate_random_matricule(self):
+        matricule = self.consultant.generate_random_matricule()
+        self.assertEqual(len(matricule), Consultant.MATRICULE_LENGTH)
 
-        # Check that the user's email and company are correct
-        self.assertEqual(user.email, email)
-        self.assertEqual(user.company, company)
+    def test_save_with_unique_matricule(self):
+        consultant2 = Consultant.objects.create(
+            user_name='testuser2',
+            email='test2@example.com',
+            first_name='Test',
+            last_name='User',
+            company='Test Company'
+        )
+        self.assertNotEqual(self.consultant.matricule, consultant2.matricule)
 
-        # Check that the user's password was set correctly
-        self.assertTrue(user.check_password(password))
+
 

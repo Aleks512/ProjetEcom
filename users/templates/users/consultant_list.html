@@ -1,0 +1,25 @@
+{% block content %}
+  <table>
+    <thead>
+      <tr>
+        <th>Matricule</th>
+        <th>Prénom</th>
+        <th>Nom</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for consultant in consultant_list %}
+        <tr>
+          <td>{{ consultant.matricule }}</td>
+          <td>{{ consultant.first_name }}</td>
+          <td>{{ consultant.last_name }}</td>
+          <td>{{ consultant.email }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+
+
+
