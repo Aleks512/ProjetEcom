@@ -11,7 +11,7 @@ class ConsultantCreationForm(forms.ModelForm):
     class Meta:
         model = Consultant
         fields = "__all__"
-        exclude = ('matricule',)
+        exclude = ('matricule', 'clients_number')
         widgets = {
             'password': forms.PasswordInput(),
         }
@@ -44,7 +44,7 @@ class ConsultantCreationForm(forms.ModelForm):
             cleaned_data['password'] = make_password(password)
         return cleaned_data
 
-class ClientCreationForm(UserCreationForm):
+class CustomerCreationForm(UserCreationForm):
     user_name = forms.CharField(max_length=30, required=True)
     first_name = forms.CharField(max_length=30, required=True)
     last_name = forms.CharField(max_length=30, required=True)

@@ -1,7 +1,7 @@
-
+from django.contrib.auth.models import User
 from django.test import TestCase
 from django.contrib.auth import get_user_model
-from .models import  Consultant
+from .models import Consultant, Customer
 
 
 class UserAccountTests(TestCase):
@@ -54,6 +54,76 @@ class ConsultantModelTest(TestCase):
             company='Test Company'
         )
         self.assertNotEqual(self.consultant.matricule, consultant2.matricule)
+
+    class ConsultantTestCase(TestCase):
+        def setUp(self):
+            self.user1 = User.objects.create(
+                username='user1',
+                email='user1@example.com',
+                password='password1',
+                customer=False,
+                company='Ventalis'
+            )
+
+            self.user2 = User.objects.create(
+                username='user2',
+                email='user2@example.com',
+                password='password2',
+                customer=False,
+                company='Ventalis'
+            )
+
+            self.consultant1 = Consultant.objects.create(
+                user=self.user1,
+                clients_number=0
+            )
+
+            self.consultant2 = Consultant.objects.create(
+                user=self.user2,
+                clients_number=2
+            )
+
+        def test_assign_consultant_to_client(self):
+            user3 = User.objects.create(
+                username='user3',
+                email='user3@example.com',
+                password='password3',
+                customer=True,
+                company='ABC Corp'
+            )
+            consultant = Consultant.assign_consultant_to_client(user3)
+            customer = Customer.objects.filter(consultant_applied=user3).first()
+
+            self.assertEqual(customer.company, user3.company)
+            self.assertEqual(customer.consultant, consultant)
+            self.assertEqual(consultant.clients_number, 1)
+
+        def test_assign_consultant_to_client_with_existing_consultant(self):
+            user4 = User.objects.create(
+                username='user4',
+                email='user4@example.com',
+                password='password4',
+                customer=True,
+                company='XYZ Inc'
+            )
+            consultant = Consultant.assign_consultant_to_client(user4)
+            customer = Customer.objects.filter(consultant_applied=user4).first()
+
+            self.assertEqual(customer.company, user4.company)
+            self.assertEqual(customer.consultant, self.consultant2)
+            self.assertEqual(consultant, None)
+
+        def test_assign_consultant_to_client_with_no_consultants(self):
+            user5 = User.objects.create(
+                username='user5',
+                email='user5@example.com',
+                password='password5',
+                customer=True,
+                company='DEF LLC'
+            )
+            consultant = Consultant.assign_consultant_to_client(user5)
+
+            self.assertEqual(consultant, None)
 
 
 

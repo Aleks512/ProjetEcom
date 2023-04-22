@@ -60,13 +60,14 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['company']
     def __str__(self):
-        return self.email or self.user_name
+        return self.user_name or self.email
 
 class Consultant(NewUser):
 
     MATRICULE_LENGTH = 5
 
-    matricule = models.CharField(_("matricule"),max_length=MATRICULE_LENGTH, unique=True)
+    matricule = models.CharField(_("Matricule"),max_length=MATRICULE_LENGTH, unique=True)
+
 
     def generate_random_matricule(self):
         return ''.join(random.choices(string.ascii_uppercase + string.digits, k=self.MATRICULE_LENGTH))
@@ -85,6 +86,7 @@ class Consultant(NewUser):
 
     def get_full_name(self):
         return f"{self.first_name} {self.last_name}"
+
     def get_clients_count(self):
         return self.clients.count()
     def get_absolute_url(self):
@@ -100,7 +102,8 @@ class Customer(NewUser):
     @staticmethod
     def assign_consultant_to_client(user):
         if not user.customer:
-            consultant = Consultant.objects.annotate(num_clients=models.Count('clients')).order_by('num_clients').first()
+            consultant = Consultant.objects.annotate(num_clients=models.Count('clients')).order_by(
+                'num_clients').first()
             Customer.objects.create(consultant_applied=user, consultant=consultant, company=user.company)
             return consultant
         return None

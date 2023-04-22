@@ -1,0 +1,23 @@
+{% block content %}
+    <h1>{{ title }}</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Customer UserName</th>
+                <th>Customer Email</th>
+                <th>Customer First Name</th>
+                <th>Consultant name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for customer in customers %}
+                <tr>
+                    <td>{{ customer.user_name }}</td>
+                    <td>{{ customer.email }}</td>
+                    <td>{{ customer.first_name }}</td>
+                    <td>{{ customer.consultant_applied.get_full_name }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
