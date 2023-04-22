@@ -1,7 +1,8 @@
 from django import forms
-from django.http import request
+from django.contrib.auth.forms import UserCreationForm
+from django.db import models
 
-from .models import Consultant
+from .models import Consultant, Customer, NewUser
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import password_validation
 
@@ -42,6 +43,29 @@ class ConsultantCreationForm(forms.ModelForm):
             password_validation.validate_password(password)
             cleaned_data['password'] = make_password(password)
         return cleaned_data
+
+class ClientCreationForm(UserCreationForm):
+    user_name = forms.CharField(max_length=30, required=True)
+    first_name = forms.CharField(max_length=30, required=True)
+    last_name = forms.CharField(max_length=30, required=True)
+    email = forms.EmailField(max_length=100, required=True)
+    company = forms.CharField(max_length=100, required=True)
+    password1 = forms.CharField(widget=forms.PasswordInput)
+    password2 = forms.CharField(widget=forms.PasswordInput)
+
+    class Meta:
+        model = Customer
+        fields = ('user_name','first_name', 'last_name', 'email', 'company', 'password1', 'password2')
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.is_client = True
+        user.is_active = True
+        least_clients_consultant = Consultant.objects.annotate(num_clients=models.Count('clients')).order_by('num_clients').first()
+        user.consultant_applied = least_clients_consultant
+        if commit:
+            user.save()
+        return user
 
 
 

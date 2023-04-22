@@ -82,15 +82,32 @@ class Consultant(NewUser):
 
     class Meta:
         db_table = "Consultants"
+
+    def get_full_name(self):
+        return f"{self.first_name} {self.last_name}"
+    def get_clients_count(self):
+        return self.clients.count()
     def get_absolute_url(self):
         return '/consultant/list'
 
 
 class Customer(NewUser):
-    consultant_applied = models.ForeignKey(Consultant, on_delete=models.CASCADE, null=True, blank=True)
+    consultant_applied = models.ForeignKey('Consultant', on_delete=models.CASCADE, null=True, related_name='clients')
 
     class Meta:
         db_table = "Customers"
+
+    @staticmethod
+    def assign_consultant_to_client(user):
+        if not user.customer:
+            consultant = Consultant.objects.annotate(num_clients=models.Count('clients')).order_by('num_clients').first()
+            Customer.objects.create(consultant_applied=user, consultant=consultant, company=user.company)
+            return consultant
+        return None
+
+
+
+
 
 
 
