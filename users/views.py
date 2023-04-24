@@ -8,6 +8,10 @@ from .models import Consultant, Customer
 from django.db import models
 
 
+def home(request):
+
+    return render(request, "users/home.html")
+
 class ConsultantCreateView(CreateView):
     template_name = 'users/consultant_create.html'
     form_class = ConsultantCreationForm
