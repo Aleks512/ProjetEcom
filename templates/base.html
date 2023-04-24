@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% if user.is_authenticated %}
+<li class="nav-item">
+  <a class="nav-link" href="{% url 'logout' %}">Se déconnecter</a>
+</li>
+{% else %}
+<li class="nav-item">
+  <a class="nav-link" href="{% url 'login' %}">Se connecter</a>
+</li>
+{% endif %}
+
+      {% block content %}
+      {% endblock %}
+</body>
+</html>
