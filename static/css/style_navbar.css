@@ -30,5 +30,29 @@
   border-color: #27b547;
 }
 
+.dropdown-toggle {
+  background-color: #000000;
+  border-color: #0d9c43;
+  color: #0d9c43;
+}
+.dropdown-toggle:hover {
+  background-color: #0d9c43;
+  color: #000000;
+}
+.dropdown-menu {
+  background-color: #000000;
+}
+.dropdown-item {
+  color: #0d9c43;
+}
+.dropdown-item:hover {
+  background-color: #0d9c43;
+  color: #000000;
+}
+
+.active{
+  background-color: #0d9c43;
+}
+
 
 

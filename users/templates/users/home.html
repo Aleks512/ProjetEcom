@@ -17,7 +17,6 @@
 
 {% if user.is_authenticated and user.is_superuser%}
     <h3>Bonjour Superuser {{user.email}}</h3>
-    <
 {% endif %}
 
 {% if user.is_authenticated and user.is_employee %}

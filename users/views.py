@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views import generic
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 from .forms import ConsultantCreationForm, CustomerCreationForm
@@ -50,3 +50,5 @@ class ConsultantListView(ListView):
         queryset = queryset.annotate(num_clients=models.Count('clients'))
         return queryset
 
+class AdminHomePageView(TemplateView):
+    template_name = "users/home_admin.html"

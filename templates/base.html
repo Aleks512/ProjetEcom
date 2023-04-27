@@ -40,9 +40,17 @@
         <ul class="navbar-nav ms-auto">
           {% if user.is_authenticated %}
             {% if user.is_superuser %}
-              <li class="nav-item">
-                <a class="nav-link" href="#">Administration</a>
-              </li>
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Administration
+              </button>
+              <ul class="dropdown-menu dropdown-menu-dark">
+                <li><a class="dropdown-item" href="#">Liste de consultants</a></li>
+                <li><a class="dropdown-item" href="#">Liste de clients</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Gestion de mots de passes</a></li>
+              </ul>
+            </div>
             {% elif user.is_employee %}
               <li class="nav-item">
                 <a class="nav-link" href="#">Intranet</a>
