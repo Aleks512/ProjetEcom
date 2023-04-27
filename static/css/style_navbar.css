@@ -1,0 +1,33 @@
+/*:root {
+  --bs-navbar-bg: red; !* set the background color for the navbar to black *!
+}
+
+
+.bg-dark {
+  background-color: grey;
+}*/
+
+.my-bg-dark {
+  background-color: #ff0000; /* set the background color to red */
+}
+.navbar-dark .navbar-brand,
+.navbar-dark .navbar-nav .nav-link {
+  color: #009042;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: #27b547;
+}
+
+.navbar-brand img {
+  max-width: 50%;
+  height: auto;
+}
+
+.navbar-toggler {
+  background-color: #009042;
+  border-color: #27b547;
+}
+
+
+
