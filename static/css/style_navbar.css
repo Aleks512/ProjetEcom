@@ -7,9 +7,10 @@
   background-color: grey;
 }*/
 
-.my-bg-dark {
-  background-color: #ff0000; /* set the background color to red */
+.navbar-dark {
+  background-color: #000000 !important;
 }
+
 .navbar-dark .navbar-brand,
 .navbar-dark .navbar-nav .nav-link {
   color: #009042;
