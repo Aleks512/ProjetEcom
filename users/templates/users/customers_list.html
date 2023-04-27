@@ -4,19 +4,21 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Customer UserName</th>
-                <th>Customer Email</th>
-                <th>Customer First Name</th>
-                <th>Consultant name</th>
+                <th>Entreprise</th>
+                <th>Email</th>
+                <th>Prénom</th>
+                <th>Nom de famille</th>
+                <th>Consultant en charge</th>
             </tr>
         </thead>
         <tbody>
             {% for customer in customers %}
                 <tr>
-                    <td>{{ customer.user_name }}</td>
+                    <td>{{ customer.company }}</td>
                     <td>{{ customer.email }}</td>
                     <td>{{ customer.first_name }}</td>
-                    <td>{{ customer.consultant_applied.get_full_name }}</td>
+                    <td>{{ customer.last_name }}</td>
+                    <td>{{ customer.consultant_applied }}</td>
                 </tr>
             {% endfor %}
         </tbody>

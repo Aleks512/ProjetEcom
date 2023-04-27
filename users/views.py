@@ -37,7 +37,7 @@ class CustomerListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'List of customers'
+        context['title'] = 'Liste de clients'
         return context
 
 
