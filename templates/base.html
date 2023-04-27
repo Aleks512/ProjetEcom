@@ -48,7 +48,7 @@
                 <li><a class="dropdown-item" href="{% url 'consultant-list' %}">Liste de consultants</a></li>
                 <li><a class="dropdown-item" href="{% url 'customers-list' %}">Liste de clients</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Gestion de mots de passes</a></li>
+                <li><a class="dropdown-item" href="{% url 'consultant-add' %}">Ajouter un consultant dans la base</a></li>consultant-add
               </ul>
             </div>
             {% elif user.is_employee %}
