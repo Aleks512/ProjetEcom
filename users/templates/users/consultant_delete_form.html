@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Suppression d'un consultant</h2>
+<form method="post">
+<div>
+  {% csrf_token %}
+  <p>Etes vous sure de vouloir supprimer "{{ object.first_name }} {{ object.last_name }} de notre base "?</p>
+  <input type="submit" value="Confirmer" />
+</div>
+</form>
+{% endblock %}

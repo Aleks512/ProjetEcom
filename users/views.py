@@ -1,11 +1,14 @@
+from django.forms import PasswordInput
 from django.shortcuts import render
 from django.views import generic
 from django.views.generic import ListView, TemplateView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .forms import ConsultantCreationForm, CustomerCreationForm
 from .models import Consultant, Customer
 from django.db import models
+from django.contrib.auth.hashers import make_password
+
 
 
 def home(request):
@@ -49,6 +52,24 @@ class ConsultantListView(ListView):
         queryset = super().get_queryset()
         queryset = queryset.annotate(num_clients=models.Count('clients'))
         return queryset
+
+class ConsultantUpdate(UpdateView):
+    model = Consultant
+    template_name = "users/consultant_update_form.html"
+    fields = ['email', 'password', 'first_name', 'last_name', 'company']
+    widgets = {
+        'password': PasswordInput()
+    }
+    def form_valid(self, form):
+        form.instance.password = make_password(form.cleaned_data['password'])
+        return super().form_valid(form)
+
+class ConsultantDelete(DeleteView):
+        model = Consultant
+        template_name = "users/consultant_delete_form.html"
+        fields = '__all__'
+        def get_success_url(self):
+            return '/consultant/list'
 
 class AdminHomePageView(TemplateView):
     template_name = "users/home_admin.html"
