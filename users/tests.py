@@ -148,7 +148,6 @@ class CustomerListViewTestCase(TestCase):
 
 
 
-
 class ConsultantListViewTestCase(TestCase):
     @classmethod
     def setUpTestData(cls):

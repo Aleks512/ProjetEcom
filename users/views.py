@@ -33,7 +33,7 @@ class ConsultantListView(UserPassesTestMixin, ListView):
 
 class SignUp(generic.CreateView):
     form_class = CustomerCreationForm
-    success_url = reverse_lazy("customers-list")
+    success_url = reverse_lazy("login")
     template_name = "users/client_signup.html"
 
 class CustomerListView(UserPassesTestMixin, ListView):
