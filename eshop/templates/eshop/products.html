@@ -7,9 +7,8 @@
 {% for product in products %}
     <h2>{{product.name}}</h2>
     {% if product.image %}
-
-        <img src="{{product.image.url}}" alt="{{product.name}}" style="max-width: 25%; height: auto;">
-
+    <img src="{{product.image.url}}" alt="{{product.name}}" style="max-width: 25%; height: auto;">
+    <a href="{{ product.get_absolute_url }}" target="_blank">Voir l'article</a>
     {% endif %}
 {% endfor %}
 

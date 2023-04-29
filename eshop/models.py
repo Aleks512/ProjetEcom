@@ -1,6 +1,7 @@
 from decimal import Decimal
 
 from django.db import models
+from django.urls import reverse
 from django.utils.text import slugify
 
 
@@ -33,6 +34,9 @@ class Product(models.Model):
         if quantity % 1000 != 0:
             raise ValueError("La quantité doit être un multiple de 1000.")
         return self.unit_price * (Decimal(quantity) / Decimal('1000'))
+
+    def get_absolute_url(self):
+        return reverse("product", kwargs={"slug":self.slug})
 
     def save(self, *args, **kwargs):
         if not self.slug:
