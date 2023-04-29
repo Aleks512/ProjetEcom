@@ -47,3 +47,12 @@ class EshopModelTests(TestCase):
             product.price_for_quantity(500)
         self.assertEqual(product.price_for_quantity(1000), Decimal('1.00'))
         self.assertEqual(product.price_for_quantity(2000), Decimal('2.00'))
+
+
+class CategoryModelTests(TestCase):
+    def test_cat_slug(self):
+        # Créer une nouvelle catégorie avec un nom et un slug vides
+        category = Category.objects.create(name="Test Category")
+
+        # Vérifier que le slug a été généré automatiquement avec le nom de la catégorie
+        self.assertEqual(category.slug, "test-category")
