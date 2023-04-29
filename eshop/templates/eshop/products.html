@@ -7,7 +7,9 @@
 {% for product in products %}
     <h2>{{product.name}}</h2>
     {% if product.image %}
-        <img src="{{product.image.url}}" alt="{{product.name}}">
+
+        <img src="{{product.image.url}}" alt="{{product.name}}" style="max-width: 25%; height: auto;">
+
     {% endif %}
 {% endfor %}
 
