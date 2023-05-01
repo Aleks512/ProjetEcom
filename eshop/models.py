@@ -4,6 +4,8 @@ from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
 
+from ventalis.settings import AUTH_USER_MODEL
+
 
 # Create your models here.
 class Category(models.Model):
@@ -43,3 +45,11 @@ class Product(models.Model):
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
+class Order(models.Model):
+    user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1000)
+    ordered = models.BooleanField(default=False)
+
+def __str__(self):
+    return f"{self.product.name} ({self.quantity})"
