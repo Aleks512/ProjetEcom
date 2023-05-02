@@ -56,5 +56,12 @@ def cart(request):
 
     return render(request, "eshop/cart.html", context={"orders":cart.orders.all()})
 
+def cart_delete(request):
+    if cart:=request.user.customer.cart:
+        cart.orders.all().delete()
+        cart.delete()
+    return redirect("home")
+
+
 
 
