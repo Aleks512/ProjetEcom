@@ -46,19 +46,20 @@ class Product(models.Model):
         super().save(*args, **kwargs)
 
 class Order(models.Model):
-    user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey('users.Customer', on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1000)
     ordered = models.BooleanField(default=False)
 
     def __str__(self):
+
         return f"{self.product.name} ({self.quantity})"
 
 
 
 
 class Cart(models.Model):
-    user = models.OneToOneField(AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.OneToOneField('users.Customer', on_delete=models.CASCADE)
     orders = models.ManyToManyField(Order)
     ordered = models.BooleanField(default=False)
     ordered_date = models.DateTimeField(blank=True, null=True)

@@ -3,10 +3,18 @@
 
 {% block content %}
 
+{% for message in messages %}
+    {{ message }}
+{% endfor %}
+
+
 <h2>{{ product.name }}</h2>
 <h3>{{product.unit_price}} €</h3>
 <img src="{{product.image.url}}" alt="{{product.name}}" style="max-width: 25%; height: auto;">
 <p>{{product.description}}</p>
 <p>{{ product.stock }} pièces en stock</p>
+
+
+<p><a href="{% url 'add-to-cart' product.slug %}">Ajouter l'article dans la panier</a></p>
 
 {% endblock%}
