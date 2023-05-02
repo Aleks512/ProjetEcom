@@ -2,19 +2,17 @@
 
 {% block content %}
 
+<h1>Votre panier</h1>
 
 {% for message in messages %}
     {{ message }}
 {% endfor %}
 
-<h1>Les produits</h1>
+{% for order in orders %}
+    <h2>{{ order.product.name }}</h2>
+    <img src="{{order.product.image.url}}" alt="{{order.product.name}}" style="max-width: 25%; height: auto;">
+    <p>{{ order.quantity }} dans le panier</p>
 
-{% for product in products %}
-    <h2>{{product.name}}</h2>
-    {% if product.image %}
-    <img src="{{product.image.url}}" alt="{{product.name}}" style="max-width: 25%; height: auto;">
-    <a href="{{ product.get_absolute_url }}" target="_blank">Voir l'article</a>
-    {% endif %}
 {% endfor %}
 
 {% endblock %}
