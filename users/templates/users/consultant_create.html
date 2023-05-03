@@ -1,9 +1,24 @@
 {% extends 'base.html' %}
 
+
+
 {% block content %}
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <input type="submit" value="Créer consultant">
-</form>
+<div class="container">
+  <div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header" style="background-color: #000000; color: #ffffff;">
+          <h5 class="card-title mb-0">Créer consultant</h5>
+        </div>
+        <div class="card-body">
+          <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary" style="background-color: #27b547; border-color: #0d9c43;">Créer</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
