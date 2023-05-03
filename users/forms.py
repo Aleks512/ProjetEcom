@@ -10,8 +10,7 @@ from django.contrib.auth import password_validation
 class ConsultantCreationForm(forms.ModelForm):
     class Meta:
         model = Consultant
-        fields = "__all__"
-        exclude = ('matricule', 'clients_number')
+        fields = ("first_name", "last_name", "email", "company", "password", "is_active", "is_staff", "is_employee" )
         widgets = {
             'password': forms.PasswordInput(),
         }

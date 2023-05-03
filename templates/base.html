@@ -1,93 +1,89 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-      {% block head%}{% endblock %}
+    {% block head%}{% endblock %}
     <meta charset="UTF-8">
     <title>Ventalis</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/style_navbar.css' %}">
-  </head>
 </head>
 <body>
-<header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="{% url 'home' %}">
-        <img src="{% static 'css/logo.png' %}" alt="logo de Ventalis">
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'home' %}">Accueil</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Présentation de l'entreprise</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'products' %}">Catalogue des prestations</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
-          </li>
-        </ul>
-        <ul class="navbar-nav ms-auto">
-          {% if user.customer.cart %}
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'home' %}">
+          <img src="{% static 'css/logo.png' %}" alt="logo de Ventalis">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'cart'%}">Panier ( {{user.customer.cart.orders.count}} )</a>
+              <a class="nav-link" href="{% url 'home' %}">Accueil</a>
             </li>
-          {% endif %}
-          {% if user.is_authenticated %}
-            {% if user.is_superuser %}
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Administration
-              </button>
-              <ul class="dropdown-menu dropdown-menu-dark">
-                <li><a class="dropdown-item" href="{% url 'consultant-list' %}">Liste de consultants</a></li>
-                <li><a class="dropdown-item" href="{% url 'customers-list' %}">Liste de clients</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="{% url 'consultant-add' %}">Ajouter un consultant dans la base</a></li>
-              </ul>
-            </div>
-
-            {% elif user.is_employee %}
+            <li class="nav-item">
+              <a class="nav-link" href="#">Présentation de l'entreprise</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'products' %}">Catalogue des prestations</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contact</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav ms-auto">
+            {% if user.customer.cart %}
               <li class="nav-item">
-                <a class="nav-link" href="#">Intranet</a>
+                <a class="nav-link" href="{% url 'cart'%}">Panier ( {{user.customer.cart.orders.count}} )</a>
               </li>
-            {% elif user.is_customer %}
+            {% endif %}
+            {% if user.is_authenticated %}
+              {% if user.is_superuser %}
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Administration
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark">
+                  <li><a class="dropdown-item" href="{% url 'consultant-list' %}">Liste de consultants</a></li>
+                  <li><a class="dropdown-item" href="{% url 'customers-list' %}">Liste de clients</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="{% url 'consultant-add' %}">Ajouter un consultant dans la base</a></li>
+                </ul>
+              </div>
+              {% elif user.is_employee %}
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Intranet</a>
+                </li>
+              {% elif user.is_customer %}
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Mon espace</a>
+                </li>
+              {% endif %}
               <li class="nav-item">
-                <a class="nav-link" href="#">Mon espace</a>
+                <a class="nav-link" href="{% url 'logout' %}">Se déconnecter</a>
               </li>
-          {% endif %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'logout' %}">Se déconnecter</a>
-            </li>
-          {% else %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'signup' %}">S'inscrire</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'login' %}">Se connecter</a>
-            </li>
-          {% endif %}
-
-
-        </ul>
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'signup' %}">S'inscrire</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Se connecter</a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
       </div>
-    </div>
-  </nav>
-</header>
+    </nav>
+  </header>
 
     <div class="container">
       {% block content %}
       {% endblock %}
     </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" defer></script>
+<script src="{% static 'js/bootstrap.min.js' %}" defer></script>
 </body>
 </html>
