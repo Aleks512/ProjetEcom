@@ -1,10 +1,22 @@
 {% extends 'base.html' %}
+
 {% block content %}
-<h2>Editer les données de consultant</h2>
-<form method="post">
-<div>
-  {% csrf_token %} {{ form.as_p }}
-  <input type="submit" value="Submit" />
+<div class="container mt-5">
+  <div class="col-md-6 mx-auto">
+    <div class="card">
+      <div class="card-header" style="background-color: #000000; color: #27b547;">
+        <h4>Editer les données du consultant</h4>
+      </div>
+      <div class="card-body">
+        <form method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" class="btn btn-primary" style="background-color: #009042;">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
-</form>
 {% endblock %}
+
+
