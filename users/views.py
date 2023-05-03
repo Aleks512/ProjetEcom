@@ -49,7 +49,7 @@ class CustomerListView(UserPassesTestMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Liste de clients'
+        context['title'] = 'Clients'
         return context
 
 
@@ -64,6 +64,10 @@ class ConsultantListView(UserPassesTestMixin, ListView):
         queryset = super().get_queryset()
         queryset = queryset.annotate(num_clients=models.Count('clients'))
         return queryset
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Consultants de VentAlis'
+        return context
 
 class ConsultantUpdate(UserPassesTestMixin, UpdateView):
     model = Consultant
