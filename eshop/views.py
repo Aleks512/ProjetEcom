@@ -37,9 +37,9 @@ def add_to_cart(request, slug):
         order.quantity += 1000
         order.save()
 
-    price = product.price_for_quantity(order.quantity)
-    order.price = price
-    order.save()
+    # price = product.price_for_quantity(order.quantity)
+    # order.price = price
+    # order.save()
 
     messages.success(request, f"{product.name} a été ajouté à votre panier.")
     return redirect(reverse("product", kwargs={'slug': slug}))
@@ -50,12 +50,8 @@ def cart(request):
     orders = cart.orders.all()
     total_price = 0
     for order in orders:
-        price = order.product.price_for_quantity(order.quantity)
-        order.price = price
-        order.save()
         total_price += order.price
-
-        return render(request, "eshop/cart.html", context={"orders":orders, "total_price": total_price})
+    return render(request, "eshop/cart.html", context={"orders":orders, "total_price":total_price})
 
 
 
