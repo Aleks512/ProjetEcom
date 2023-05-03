@@ -2,6 +2,7 @@ from decimal import Decimal
 
 from django.db import models
 from django.urls import reverse
+from django.utils import timezone
 from django.utils.text import slugify
 
 from ventalis.settings import AUTH_USER_MODEL
@@ -50,6 +51,7 @@ class Order(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1000)
     ordered = models.BooleanField(default=False)
+    ordered_date = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
 
@@ -61,8 +63,15 @@ class Order(models.Model):
 class Cart(models.Model):
     user = models.OneToOneField('users.Customer', on_delete=models.CASCADE)
     orders = models.ManyToManyField(Order)
-    ordered = models.BooleanField(default=False)
-    ordered_date = models.DateTimeField(blank=True, null=True)
+
 
     def __str__(self):
         return f"Client-{self.user.is_client} {self.user.user_name}"
+
+    def delete(self, *args, **kwargs):
+        for order in self.orders.all():
+            order.ordered =True
+            order.ordered_date = timezone.now()
+            order.save()
+        self.orders.clear()
+        super().delete(*args, **kwargs)

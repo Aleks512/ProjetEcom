@@ -38,7 +38,7 @@ def add_to_cart(request, slug):
     customer = user.customer
     product = get_object_or_404(Product, slug=slug)
     cart, _ = Cart.objects.get_or_create(user=customer)
-    order, created = Order.objects.get_or_create(user=customer, product=product)
+    order, created = Order.objects.get_or_create(user=customer, ordered=False, product=product)
 
     if created:
         cart.orders.add(order)
