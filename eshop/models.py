@@ -36,7 +36,7 @@ class Product(models.Model):
     def price_for_quantity(self, quantity):
         if quantity % 1000 != 0:
             raise ValueError("La quantité doit être un multiple de 1000.")
-        return self.unit_price * (Decimal(quantity) / Decimal('1000'))
+        return self.unit_price * (Decimal(quantity))
 
     def get_absolute_url(self):
         return reverse("product", kwargs={"slug":self.slug})
@@ -53,11 +53,9 @@ class Order(models.Model):
     ordered = models.BooleanField(default=False)
     ordered_date = models.DateTimeField(blank=True, null=True)
 
+
     def __str__(self):
-
         return f"{self.product.name} ({self.quantity})"
-
-
 
 
 class Cart(models.Model):

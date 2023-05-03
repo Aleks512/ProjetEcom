@@ -12,8 +12,13 @@
     <h2>{{ order.product.name }}</h2>
     <img src="{{order.product.image.url}}" alt="{{order.product.name}}" style="max-width: 25%; height: auto;">
     <p>{{ order.quantity }} dans le panier</p>
-
+    <p>Prix unitaire {{ order.product.unit_price }} €</p>
+    <p>Prix total pour cet article {{ order.price }} €</p>
 {% endfor %}
+
+
+
+<h3>Prix total du panier : {{ total_price }} €</h3>
 
 <a href="{% url 'cart-delete' %}">Supprimer le panier</a>
 
