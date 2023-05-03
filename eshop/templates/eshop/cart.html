@@ -2,21 +2,31 @@
 
 {% block content %}
 
-<h1>Votre panier</h1>
-
-{% for message in messages %}
-    {{ message }}
-{% endfor %}
-
-{% for order in orders %}
-    <h2>{{ order.product.name }}</h2>
-    <img src="{{order.product.image.url}}" alt="{{order.product.name}}" style="max-width: 25%; height: auto;">
-    <p>{{ order.quantity }} dans le panier</p>
-    <p>Prix unitaire {{ order.product.unit_price }} €</p>
-    <p>Prix total pour cet article {{ order.price }} €</p>
-{% endfor %}
 
 
+ <h1>Panier de {{user.customer.first_name}} {{user.customer.last_name}}</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Photo</th>
+        <th>Produit</th>
+        <th>Prix unitaire</th>
+        <th>Quantité</th>
+        <th>Prix</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for order in orders %}
+        <tr>
+          <td><img src="{{order.product.image.url}}" alt="{{order.product.name}}" style="max-width: 10%; height: auto;"></td>
+          <td>{{ order.product.name }}</td>
+          <td>{{ order.product.unit_price }}</td>
+          <td>{{ order.quantity }}</td>
+          <td>{{ order.price }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 
 <h3>Prix total du panier : {{ total_price }} €</h3>
 
