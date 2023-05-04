@@ -2,8 +2,42 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.contrib import messages
-from eshop.models import Product, Cart, Order
+from eshop.models import Product, Cart, Order, Category
+from .forms import CategoryCreateForm, CategoryUpdateForm, CategoryDeleteForm
 
+
+def category_list(request):
+    categories = Category.objects.all()
+    context = {'categories': categories}
+    return render(request, 'eshop/category_list.html', context)
+
+def product_list_by_category(request, category_slug):
+    category = get_object_or_404(Category, slug=category_slug)
+    products = Product.objects.filter(category=category)
+    context = {'category': category, 'products': products}
+    return render(request, 'eshop/product_list_by_category.html', context)
+def category_create_view(request):
+    form = CategoryCreateForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect('category-list')
+    return render(request, 'eshop/category_create.html', {'form': form})
+
+def category_update_view(request, slug):
+    category = get_object_or_404(Category, slug=slug)
+    form = CategoryUpdateForm(request.POST or None, instance=category)
+    if form.is_valid():
+        form.save()
+        return redirect('home')
+    return render(request, 'eshop/category_update.html', {'form': form, 'category': category})
+
+def category_delete_view(request, slug):
+    category = get_object_or_404(Category, slug=slug)
+    form = CategoryDeleteForm(request.POST or None, instance=category)
+    if request.method == 'POST':
+        category.delete()
+        return redirect('home')
+    return render(request, 'category_delete.html', {'form': form, 'category': category})
 def products(request):
     products = Product.objects.all()
     return render(request, "eshop/products.html", context={"products":products})
@@ -36,10 +70,6 @@ def add_to_cart(request, slug):
     else:
         order.quantity += 1000
         order.save()
-
-    # price = product.price_for_quantity(order.quantity)
-    # order.price = price
-    # order.save()
 
     messages.success(request, f"{product.name} a été ajouté à votre panier.")
     return redirect(reverse("product", kwargs={'slug': slug}))

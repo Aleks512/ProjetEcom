@@ -3,11 +3,20 @@
 {% block title %}Log In{% endblock %}
 
 {% block content %}
-<h2>Log In</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Log In</button>
-</form>
+<div class="container mt-lg-5">
+    <div class="col-md-5 mx-auto">
+        <div class="card-header" style="background-color: #000000; color: #27b547;">
+            <h4>Login</h4>
+        </div>
+        <form method="post" class="border rounded p-4" style="background-color: #f8f9fa;">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary" style="background-color: #009042;">Envoyer</button>
+            </div>
+        </form>
+    </div>
+</div>
 
 {% endblock %}

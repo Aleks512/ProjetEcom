@@ -7,8 +7,11 @@
     <meta charset="UTF-8">
     <title>Ventalis</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/style_navbar.css' %}">
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+ <link rel="stylesheet" href="{% static 'css/style_navbar.css' %}">
+
 </head>
 <body>
   <header>
@@ -55,9 +58,17 @@
                 </ul>
               </div>
               {% elif user.is_employee %}
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Intranet</a>
-                </li>
+                <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Intranet
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark">
+                  <li><a class="dropdown-item" href="#">Categories</a></li>
+                  <li><a class="dropdown-item" href="#">Produits</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Liste de deux</a></li>
+                </ul>
+              </div>
               {% elif user.is_customer %}
                 <li class="nav-item">
                   <a class="nav-link" href="#">Mon espace</a>
@@ -80,10 +91,28 @@
     </nav>
   </header>
 
+
+  {% if user.is_authenticated and user.is_superuser %}
+    <div class="container mt-5">
+      <h6>Vous êtes, <span class="badge bg-black">{{user.email}}</span></h6>
+      <h4 class="text-success mb-4" style="color: #27b547">Administrateur chez Ventalis</h4>
+    </div>
+  {% endif %}
+
+  {% if user.is_authenticated and user.is_employee %}
+    <h6 class="text-success mb-4" style="color: #27b547">Vous êtes, <span class="badge bg-black" style="color: #27b547">{{user.first_name}}</span> , Consultant Ventalis</h6>
+  {% endif %}
+
+  {% if user.is_authenticated and user.customer %}
+    <h6 class="text-success mb-4" style="color: #27b547">Vous êtes, <span class="badge bg-black" style="color: #27b547">{{user.first_name}}</span> , votre consultant est  <span class="badge bg-black" style="color: #27b547">{{user.customer.consultant_applied.email}}</span> </h6>
+    </div>
+  {% endif %}
+
+
     <div class="container">
+
       {% block content %}
       {% endblock %}
     </div>
-<script src="{% static 'js/bootstrap.min.js' %}" defer></script>
 </body>
 </html>

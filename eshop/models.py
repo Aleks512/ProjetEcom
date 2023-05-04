@@ -33,10 +33,6 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
-    # def price_for_quantity(self, quantity):
-    #     if quantity % 1000 != 0:
-    #         raise ValueError("La quantité doit être un multiple de 1000.")
-    #     return self.unit_price * (Decimal(quantity))
 
     def get_absolute_url(self):
         return reverse("product", kwargs={"slug":self.slug})

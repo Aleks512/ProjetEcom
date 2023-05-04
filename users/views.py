@@ -13,8 +13,12 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 
 
 def home(request):
+    clients = Customer.objects.all()
+    for client in clients:
+        consultant = client.consultant_applied
+        print(consultant)
 
-    return render(request, "users/home.html")
+    return render(request, "home.html", context={"consultant":consultant})
 
 class ConsultantCreateView(UserPassesTestMixin,CreateView):
     template_name = 'users/consultant_create.html'
