@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
 
 ]
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'#ajouté
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -68,6 +69,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media', # added
+                'django.template.context_processors.static', # added
             ],
         },
     },

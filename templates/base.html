@@ -63,10 +63,13 @@
                   Intranet
                 </button>
                 <ul class="dropdown-menu dropdown-menu-dark">
-                  <li><a class="dropdown-item" href="#">Categories</a></li>
-                  <li><a class="dropdown-item" href="#">Produits</a></li>
+                  <li><a class="dropdown-item" href="{% url 'category-list' %}">Categories</a></li>
                   <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Liste de deux</a></li>
+                  <li><a class="dropdown-item" href="{% url 'category-create' %}">Créer une categories</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="{% url 'products-list-mng' %}">Produits</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="{% url 'product-create' %}">Ajouter un produit</a></li>
                 </ul>
               </div>
               {% elif user.is_customer %}

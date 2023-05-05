@@ -1,14 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div class="container">
-    <h1 class="mb-4">Supprimer la catégorie "{{ object.name }}"</h1>
-    <p>Êtes-vous sûr de vouloir supprimer cette catégorie?</p>
-    <form method="post">
-      {% csrf_token %}
-      <input type="hidden" name="next" value="{{ next }}">
-      <button type="submit" class="btn btn-danger">Supprimer</button>
-      <a href="{% url 'eshop:category-list' %}" class="btn btn-secondary">Annuler</a>
-    </form>
-  </div>
+  <h1>Supprimer la catégorie "{{ category.name }}"</h1>
+  <hr>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-danger">Supprimer</button>
+    <a href="{% url 'category-list' %}" class="btn btn-secondary">Annuler</a>
+  </form>
+  {% if category_deleted %}
+    <div class="alert alert-success mt-3" role="alert">
+      La catégorie "{{ category.name }}" a été supprimée avec succès.
+    </div>
+  {% endif %}
 {% endblock %}

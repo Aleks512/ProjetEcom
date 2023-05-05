@@ -2,19 +2,23 @@
 
 {% block content %}
 
-
-{% for message in messages %}
-    {{ message }}
-{% endfor %}
-
 <h1>Les produits</h1>
 
-{% for product in products %}
-    <h2>{{product.name}}</h2>
-    {% if product.image %}
-    <img src="{{product.image.url}}" alt="{{product.name}}" style="max-width: 25%; height: auto;">
-    <a href="{{ product.get_absolute_url }}">Voir l'article</a>
-    {% endif %}
-{% endfor %}
+<div class="row">
+  {% for product in products %}
+    <div class="col-md-4 mb-4">
+      <div class="card product-card">
+        {% if product.image %}
+          <img src="{{product.image.url}}" alt="{{product.name}}" class="card-img-top">
+        {% endif %}
+        <div class="card-body">
+          <h5 class="card-title">{{product.name}}</h5>
+          <p class="card-text">{{product.description}}</p>
+          <a href="{{ product.get_absolute_url }}" class="btn btn-primary">Voir l'article</a>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
 
 {% endblock %}
