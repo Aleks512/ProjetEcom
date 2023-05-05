@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseForbidden
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.contrib import messages
@@ -17,14 +18,21 @@ def product_list_by_category(request, category_slug):
     products = Product.objects.filter(category=category)
     context = {'category': category, 'products': products}
     return render(request, 'eshop/product_list_by_category.html', context)
+
+@login_required()
 def category_create_view(request):
+    if not request.user.is_authenticated or not request.user.is_employee:
+        return HttpResponseForbidden("Vous n'êtes pas autorisé à accéder à cette page.")
     form = CategoryCreateForm(request.POST or None)
     if form.is_valid():
         form.save()
         return redirect('category-list')
     return render(request, 'eshop/category_create.html', {'form': form})
 
+@login_required()
 def category_update_view(request, slug):
+    if not request.user.is_authenticated or not request.user.is_employee:
+        return HttpResponseForbidden("Vous n'êtes pas autorisé à accéder à cette page.")
     category = get_object_or_404(Category, slug=slug)
     form = CategoryUpdateForm(request.POST or None, instance=category)
     if form.is_valid():
@@ -32,7 +40,10 @@ def category_update_view(request, slug):
         return redirect('category-list')
     return render(request, 'eshop/category_update.html', {'form': form, 'category': category})
 
+@login_required()
 def category_delete_view(request, slug):
+    if not request.user.is_authenticated or not request.user.is_employee:
+        return HttpResponseForbidden("Vous n'êtes pas autorisé à accéder à cette page.")
     category = get_object_or_404(Category, slug=slug)
     form = CategoryDeleteForm(request.POST or None, instance=category)
     if request.method == 'POST':
@@ -44,7 +55,10 @@ def products(request):
     products = Product.objects.all()
     return render(request, "eshop/products.html", context={"products":products})
 
+@login_required()
 def products_list_mng(request):
+    if not request.user.is_authenticated or not request.user.is_employee:
+        return HttpResponseForbidden("Vous n'êtes pas autorisé à accéder à cette page.")
     products = Product.objects.all()
     categories = Category.objects.all()
     return render(request, "eshop/products_list_mng.html", context={"products":products, "categories": categories})
@@ -53,15 +67,20 @@ def product_detail(request, slug):
     product = get_object_or_404(Product, slug=slug)
     return render(request, "eshop/product_detail.html", context={"product":product})
 
-
+@login_required()
 def product_create_view(request):
+    if not request.user.is_authenticated or not request.user.is_employee:
+        return HttpResponseForbidden("Vous n'êtes pas autorisé à accéder à cette page.")
     form = ProductCreateForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form.save()
         return redirect('home')
     return render(request, 'eshop/product_create.html', {'form': form})
 
+@login_required()
 def product_update_view(request, slug):
+    if not request.user.is_authenticated or not request.user.is_employee:
+        return HttpResponseForbidden("Vous n'êtes pas autorisé à accéder à cette page.")
     product = get_object_or_404(Product, slug=slug)
     form = ProductUpdateForm(request.POST or None, request.FILES or None, instance=product)
     if form.is_valid():
@@ -69,7 +88,10 @@ def product_update_view(request, slug):
         return redirect('home')
     return render(request, 'eshop/product_update.html', {'form': form, 'product': product})
 
+@login_required()
 def product_delete_view(request, slug):
+    if not request.user.is_authenticated or not request.user.is_employee:
+        return HttpResponseForbidden("Vous n'êtes pas autorisé à accéder à cette page.")
     product = get_object_or_404(Product, slug=slug)
     form = ProductDeleteForm(request.POST or None, instance=product)
     if request.method == 'POST':
