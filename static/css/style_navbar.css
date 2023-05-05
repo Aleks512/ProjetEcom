@@ -69,4 +69,16 @@
 /*  height: 400px; !* modifier la valeur selon les besoins *!*/
 /*}*/
 
+.parallax-container {
+  position: relative;
+  height: 50vh;
+}
+.parallax-item {
+  position: relative;
+  z-index: 1;
+  background: url('../images/boxed-water-is-better-YQ4vknTXgfI-unsplash.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+
 

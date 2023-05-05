@@ -124,7 +124,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+
+...
+# Ajouter le type MIME pour les fichiers .mp4
+from mimetypes import MimeTypes
+mimetypes = MimeTypes()
+mimetypes.add_type('video/mp4', '.mp4')
+
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
     # BASE_DIR / "users/static",

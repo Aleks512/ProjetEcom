@@ -53,14 +53,6 @@ def product_detail(request, slug):
     product = get_object_or_404(Product, slug=slug)
     return render(request, "eshop/product_detail.html", context={"product":product})
 
-# def product_list(request, category_slug=None):
-#     category = None
-#     products = Product.objects.all()
-#     if category_slug:
-#         category = Category.objects.get(slug=category_slug)
-#         products = products.filter(category=category)
-#     context = {'category': category, 'products': products}
-#     return render(request, 'eshop/product_list.html', context)
 
 def product_create_view(request):
     form = ProductCreateForm(request.POST or None, request.FILES or None)

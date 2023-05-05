@@ -1,5 +1,55 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
+<script src="{% static 'js/parallax.min.js' %}"></script>
+
+
 {% block content %}
-HOME
+    HOME
+
+    <div class="parallax-container" style="height: 50vh;">
+        <div class="parallax-item">
+            <img src="{% static 'css/boxed-water-is-better-YQ4vknTXgfI-unsplash.jpg' %}" alt="Gif animé" style="width: 100%; height: 100%;">
+            <div class="parallax-overlay"></div>
+        </div>
+        <div class="parallax-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="parallax-text">
+                            <h2>Nous sommes les meilleurs</h2>
+                            <p>Le texte que vous voulez faire défiler va ici. Vous pouvez utiliser du Lorem Ipsum si vous voulez.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <section id="about">
+            <h2 class="text-center">À propos de nous</h2>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card bg-light mb-3">
+                        <div class="card-body">
+                            <p>Entreprise est une licorne 100% française qui a un chiffre d'affaires de 3 millions d'euros et compte 50 salariés répartis dans toute la France.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
 {% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/parallax.min.js' %}"></script>
+    <script>
+        var parallax = new Parallax(document.querySelector('.parallax-container'));
+    </script>
+{% endblock %}
+
+
+
