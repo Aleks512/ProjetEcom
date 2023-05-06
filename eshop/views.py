@@ -1,4 +1,4 @@
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponseForbidden
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
@@ -19,7 +19,7 @@ def product_list_by_category(request, category_slug):
     context = {'category': category, 'products': products}
     return render(request, 'eshop/product_list_by_category.html', context)
 
-@login_required()
+@login_required
 def category_create_view(request):
     if not request.user.is_authenticated or not request.user.is_employee:
         return HttpResponseForbidden("Vous n'êtes pas autorisé à accéder à cette page.")

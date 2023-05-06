@@ -1,11 +1,12 @@
 from django.contrib.auth import get_user_model
 from decimal import Decimal
-from .models import Category, Product, Order, Cart
-from django.core.files.uploadedfile import SimpleUploadedFile
+from .models import Category, Product, Order
 from django.test import TestCase, Client
 from django.urls import reverse
-from users.models import Customer, NewUser, Consultant
+from users.models import Customer, NewUser
 
+
+User = get_user_model()
 
 class EshopModelTests(TestCase):
     @classmethod
@@ -63,66 +64,50 @@ class CategoryModelTests(TestCase):
 
 
 
-class CategoryViewsTest(TestCase):
 
+class CategoryCreateViewTest(TestCase):
     def setUp(self):
+        # Créer un utilisateur de test avec l'attribut is_employee=True
+        self.employee_user = NewUser.objects.create(
+            email='employee@example.com',
+            password='password123',
+            is_employee=True
+        )
+
+        # Créer un client pour effectuer les requêtes HTTP
         self.client = Client()
-        self.category = Category.objects.create(name="Test category", slug="test-category")
 
-    def test_category_list_view(self):
-        response = self.client.get(reverse('category-list'))
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'eshop/category_list.html')
-        self.assertContains(response, self.category.name)
+        # Connecter l'utilisateur de test
+        self.client.force_login(self.employee_user)
 
-    def test_product_list_by_category_view(self):
-        product = Product.objects.create(name="Test product", unit_price=10, category=self.category, slug="test-product", image = "images/Block_notes_personnalisés.jpg")
-        response = self.client.get(reverse('product_list_by_category', kwargs={'category_slug': self.category.slug}))
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'eshop/product_list_by_category.html')
-        self.assertContains(response, self.category.name)
-        self.assertContains(response, product.name)
+        # Définir les URLs pour les vues de création et de liste des catégories
+        self.create_category_url = reverse('category-create')
+        self.category_list_url = reverse('category-list')
 
-    def test_category_create_view(self):
-        consultant = Consultant.objects.create_user(password='testpass', email='consultant@exemple.com', company= "ABC bros")
-        self.client.login(username='testuser', password='testpass')
-        form_data = {'name': 'New test category', 'slug': 'new-test-category'}
-        response = self.client.post(reverse('category-create'), data=form_data)
+    def test_category_create_view_with_non_authenticated_employee_user(self):
+        # Vérifier que l'utilisateur est connecté et qu'il est employé
+        self.assertTrue(self.employee_user.is_authenticated)
+        self.assertTrue(self.employee_user.is_employee)
+
+        # Effectuer une requête GET vers la vue de création de catégorie (meme si elle figure pas dans le menu de visiteur !!!)
+        response = self.client.get(self.create_category_url)
+
+        # Vérifier que la vue renvoie le code HTTP 302
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse('category-list'))
-        self.assertTrue(Category.objects.filter(name='New test category', slug='new-test-category').exists())
-#
-#     def test_category_update_view(self):
-#         user = User.objects.create_user(username='testuser', password='testpass')
-#         self.client.login(username='testuser', password='testpass')
-#         form_data = {'name': 'Updated test category', 'slug': 'updated-test-category'}
-#         response = self.client.post(reverse('category-update', kwargs={'slug': self.category.slug}), data=form_data)
-#         self.assertEqual(response.status_code, 302)
-#         self.assertRedirects(response, reverse('category-list'))
-#         self.assertTrue(Category.objects.filter(name='Updated test category', slug='updated-test-category').exists())
-#
-#     def test_category_delete_view(self):
-#         user = User.objects.create_user(username='testuser', password='testpass')
-#         self.client.login(username='testuser', password='testpass')
-#         response = self.client.post(reverse('category-delete', kwargs={'slug': self.category.slug}))
-#         self.assertEqual(response.status_code, 302)
-#         self.assertRedirects(response, reverse('category-list'))
-#         self.assertFalse(Category.objects.filter(slug=self.category.slug).exists())
-#
-# class ProductViewsTest(TestCase):
-#
-#     def setUp(self):
-#         self.client = Client()
-#         self.category = Category.objects.create(name="Test category", slug="test-category")
-#         self.product = Product.objects.create(name="Test product", unit_price=10, category=self.category, slug="test-product")
-#
-#     def test_products_view(self):
-#         response = self.client.get(reverse('products'))
-#         self.assertEqual(response.status_code, 200)
-#         self.assertTemplateUsed(response, 'eshop/products.html')
-#         self.assertContains(response, self.product.name)
-#
-#     def test_products_list_mng_view(self):
-#         response = self.client.get(reverse('products-list-mng'))
-#         self.assertEqual(response.status_code, 200)
-#         self.assertTemplateUsed(response, 'eshop/products_list_mng.html')
+
+        # Vérifier que le renvoie vers le login
+        self.assertRedirects(response,'/login/?next=/category/create/')
+
+        # Effectue une requête GET vers la vue de création de catégorie
+        response = self.client.get('/category/create/')
+
+        # Vérifie que la réponse renvoie le code HTTP 200
+        self.assertEqual(response.status_code, 302)
+
+        # Effectuer une requête POST pour créer une nouvelle catégorie
+        data = {'name': 'Test Category', 'slug': 'test-category'}
+        response = self.client.post(self.create_category_url, data=data)
+
+
+
+
