@@ -1,11 +1,16 @@
 /*:root {
   --bs-navbar-bg: red; !* set the background color for the navbar to black *!
 }
-
-
 .bg-dark {
   background-color: grey;
 }*/
+
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
+body, html {
+  height: 100%;
+  color: #777;
+  line-height: 1.8;
+}
 
 .navbar-dark {
   background-color: #000000 !important;
@@ -68,17 +73,3 @@
 /*  width: 100%;*/
 /*  height: 400px; !* modifier la valeur selon les besoins *!*/
 /*}*/
-
-.parallax-container {
-  position: relative;
-  height: 50vh;
-}
-.parallax-item {
-  position: relative;
-  z-index: 1;
-  background: url('../images/boxed-water-is-better-YQ4vknTXgfI-unsplash.jpg') no-repeat center center fixed;
-  background-size: cover;
-}
-
-
-

@@ -1,4 +1,5 @@
 from django.forms import PasswordInput
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import generic
 from django.views.generic import ListView, TemplateView
@@ -13,12 +14,12 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 
 
 def home(request):
-    clients = Customer.objects.all()
-    for client in clients:
-        consultant = client.consultant_applied
-        print(consultant)
 
-    return render(request, "home.html", context={"consultant":consultant})
+    return render(request, "home.html")
+
+def presentation(request):
+
+    return render(request, "presentation.html")
 
 class ConsultantCreateView(UserPassesTestMixin,CreateView):
     template_name = 'users/consultant_create.html'

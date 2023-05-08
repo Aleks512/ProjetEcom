@@ -71,6 +71,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media', # added
                 'django.template.context_processors.static', # added
+
             ],
         },
     },
@@ -125,11 +126,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 
-...
-# Ajouter le type MIME pour les fichiers .mp4
-from mimetypes import MimeTypes
-mimetypes = MimeTypes()
-mimetypes.add_type('video/mp4', '.mp4')
 
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'

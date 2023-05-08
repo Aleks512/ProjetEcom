@@ -1,21 +1,29 @@
 {% load static %}
 
-<!DOCTYPE html>
+
 <html lang="fr">
 <head>
-    {% block head%}{% endblock %}
     <meta charset="UTF-8">
-    <title>Ventalis</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ventalis</title>
+
+    {% block head%}{% endblock %}
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'css/style_navbar.css' %}">
+
     {% load bootstrap5 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
- <link rel="stylesheet" href="{% static 'css/style_navbar.css' %}">
-
+  <link rel="stylesheet" href="{% static 'css/style_navbar.css' %}">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
-<body>
+
+<body style="padding-top: 2%">
   <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="row">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'home' %}">
           <img src="{% static 'css/logo.png' %}" alt="logo de Ventalis">
@@ -29,7 +37,7 @@
               <a class="nav-link" href="{% url 'home' %}">Accueil</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Présentation de l'entreprise</a>
+              <a class="nav-link" href="{% url 'presentation' %}">Présentation de l'entreprise</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'products' %}">Catalogue des prestations</a>
@@ -92,30 +100,51 @@
         </div>
       </div>
     </nav>
+      </div>
   </header>
-
-
+<div class="row mt-5">
+<div class="col-sm-6">
   {% if user.is_authenticated and user.is_superuser %}
     <div class="container mt-5">
       <h6>Vous êtes, <span class="badge bg-black">{{user.email}}</span></h6>
       <h4 class="text-success mb-4" style="color: #27b547">Administrateur chez Ventalis</h4>
-    </div>
   {% endif %}
 
   {% if user.is_authenticated and user.is_employee %}
-    <h6 class="text-success mb-4" style="color: #27b547">Vous êtes, <span class="badge bg-black" style="color: #27b547">{{user.first_name}}</span> , Consultant Ventalis</h6>
+    <div class="position-fixed top-5 start-0 m-3">
+      <div class="card bg-black bg-opacity-50 text-white">
+        <div class="card-body">
+          <h6 class="card-title mb-4">Vous êtes, <span class="badge bg-white text-black">{{user.first_name}}</span>, Consultant Ventalis</h6>
+        </div>
+      </div>
+    </div>
   {% endif %}
 
   {% if user.is_authenticated and user.customer %}
     <h6 class="text-success mb-4" style="color: #27b547">Vous êtes, <span class="badge bg-black" style="color: #27b547">{{user.first_name}}</span> , votre consultant est  <span class="badge bg-black" style="color: #27b547">{{user.customer.consultant_applied.email}}</span> </h6>
-    </div>
+    <h6 class="text-success mb-4" style="color: #27b547">Vous êtes, <span class="badge bg-black" style="color: #27b547">{{user.first_name}}</span> , Consultant Ventalis</h6>
   {% endif %}
+</div>
+</div>
+  </div>
 
 
-    <div class="container">
+    <div class="container-fluid">
 
       {% block content %}
       {% endblock %}
     </div>
+
+<!-- Footer -->
+<footer class="w3-center w3-black w3-padding-64">
+  <div class="w3-xlarge w3-section">
+    <i class="fa fa-facebook-official w3-hover-opacity w3-text-green"></i>
+    <i class="fa fa-instagram w3-hover-opacity w3-text-green"></i>
+    <i class="fa fa-snapchat w3-hover-opacity w3-text-green"></i>
+    <i class="fa fa-pinterest-p w3-hover-opacity w3-text-green"></i>
+    <i class="fa fa-twitter w3-hover-opacity w3-text-green"></i>
+    <i class="fa fa-linkedin w3-hover-opacity w3-text-green"></i>
+  </div>
+</footer>
 </body>
 </html>
