@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<style>
+
+
+  .parallax {
+    /* Set background images */
+    background-image: url("{% static 'css/kendal-hnys.jpg' %}");
+    /* Full height */
+    height: 90%;
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+
+</style>
+
+<div class="parallax">
+
+
+</div>
+
+<div style=" color:white; font-size:2rem; background-color: black">
+Nous sommes reconnus pour notre efficacité et notre démarche écologique, qui consiste à reverser 20% de notre chiffre d'affaires annuel dans des projets en faveur de l'environnement.
+  Chez Ventalis, nous sommes conscients de l'importance de préserver notre planète et de contribuer à un avenir plus durable.
+</div>
+
+<div class="parallax">
+
+
+</div>
+
+<div style="height:100px; color:red; font-size:1rem; background-color: black">
+Bienvenue chez Ventalis, votre partenaire de confiance pour la vente de produits marketing et la visibilité de votre entreprise. Avec un chiffre d'affaires de 3 millions d'euros,
+  nous sommes fiers d'être une Licorne 100% française avec 50 salariés répartis dans toute la France.
+</div>
+
+<div class="parallax">
+
+
+</div>
+{% endblock %}
+
