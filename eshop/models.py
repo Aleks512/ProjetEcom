@@ -16,10 +16,16 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return f'/{self.slug}/'
+
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)
+
+
 
 class Product(models.Model):
     name = models.CharField(max_length=255, unique=True)

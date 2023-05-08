@@ -88,12 +88,15 @@ class ConsultantUpdate(UserPassesTestMixin, UpdateView):
         # Vérifier si l'utilisateur en cours est authentifié et superutilisateur
         return self.request.user.is_authenticated and self.request.user.is_superuser
 
+    def get_success_url(self):
+        return '/consultants/list/'
+
 class ConsultantDelete(UserPassesTestMixin, DeleteView):
         model = Consultant
         template_name = "users/consultant_delete_form.html"
         fields = '__all__'
         def get_success_url(self):
-            return '/consultant/list'
+            return '/consultants/list/'
 
         def test_func(self):
             # Vérifier si l'utilisateur en cours est authentifié et superutilisateur

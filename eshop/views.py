@@ -53,7 +53,9 @@ def category_delete_view(request, slug):
     return render(request, 'eshop/category_delete.html', {'form': form, 'category': category})
 def products(request):
     products = Product.objects.all()
-    return render(request, "eshop/products.html", context={"products":products})
+    categories = Category.objects.all()
+    return render(request, "eshop/products.html", context={"products": products, "categories": categories})
+
 
 @login_required()
 def products_list_mng(request):
@@ -74,7 +76,7 @@ def product_create_view(request):
     form = ProductCreateForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form.save()
-        return redirect('home')
+        return redirect('products-list-mng')
     return render(request, 'eshop/product_create.html', {'form': form})
 
 @login_required()
@@ -85,7 +87,7 @@ def product_update_view(request, slug):
     form = ProductUpdateForm(request.POST or None, request.FILES or None, instance=product)
     if form.is_valid():
         form.save()
-        return redirect('home')
+        return redirect('products-list-mng')
     return render(request, 'eshop/product_update.html', {'form': form, 'product': product})
 
 @login_required()
@@ -96,7 +98,7 @@ def product_delete_view(request, slug):
     form = ProductDeleteForm(request.POST or None, instance=product)
     if request.method == 'POST':
         product.delete()
-        return redirect('home')
+        return redirect('products-list-mng')
     return render(request, 'eshop/product_delete.html', {'form': form, 'product': product})
 def add_to_cart(request, slug):
     user = request.user

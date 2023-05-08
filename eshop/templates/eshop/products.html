@@ -1,25 +1,48 @@
 {% extends 'base.html' %}
-{% load static %}
+
 {% block content %}
-
-<h1>Les produits</h1>
-
 <div class="container">
-<div class="row">
-  {% for product in products %}
-    <div class="col-md-4 mb-4">
-      <div class="card product-card">
-        {% if product.image %}
-          <img src="{{product.image.url}}" alt="{{product.name}}" class="card-img-top">
-        {% endif %}
-        <div class="card-body">
-          <h5 class="card-title">{{product.name}}</h5>
-          <p class="card-text">{{product.description}}</p>
-          <a href="{{ product.get_absolute_url }}" class="btn btn-primary">Voir l'article</a>
+  <h1 class="my-5">Les produits</h1>
+
+  {% for category in categories %}
+    <h2>{{ category }}</h2>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      {% for product in products %}
+        {% if product.category == category %}
+        <div class="col">
+          <div class="card">
+            {% if product.image %}
+              <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img-top img-fluid" style="transition: transform 0.2s ease-in-out;">
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title">{{ product.name }}</h5>
+              <p class="card-text">{{ product.description }}</p>
+              <a href="{{ product.get_absolute_url }}" class="btn btn-success custom-btn"><i class="fa fa-eye" aria-hidden="true"></i> Voir l'article</a>
+
+            </div>
+          </div>
         </div>
-      </div>
+        {% endif %}
+      {% empty %}
+        <div class="col">
+          <p>Nous sommes en rupture de stock pour les articles de cette catégorie</p>
+        </div>
+      {% endfor %}
     </div>
   {% endfor %}
+
 </div>
-</div>
+
+<script>
+  document.querySelectorAll('.card-img-top').forEach(img => {
+    img.addEventListener('mouseenter', () => {
+      img.style.transform = 'scale(1.05)';
+    });
+    img.addEventListener('mouseleave', () => {
+      img.style.transform = 'scale(1)';
+    });
+  });
+</script>
+
 {% endblock %}
