@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 
-<body style="padding-top: 2%">
+<body">
   <header>
     <div class="row">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -104,6 +104,8 @@
     </nav>
       </div>
   </header>
+
+
 <div class="row mt-5">
 <div class="col-sm-6">
   {% if user.is_authenticated and user.is_superuser %}
@@ -131,16 +133,15 @@
   </div>
 
 
-    <div class="container-fluid">
+    <div class="container-fluid" style="position: relative">
 
       {% block content %}
       {% endblock %}
     </div>
 
-<!-- Footer -->
 <footer class="w3-center w3-black w3-padding-64">
   <div class="w3-xlarge w3-section">
-    <i class="fa fa-facebook-official w3-hover-opacity w3-text-green"></i>
+    <i class="fa fa-facebook-official w3-hover-opacity w3-text-GREEN"></i>
     <i class="fa fa-instagram w3-hover-opacity w3-text-green"></i>
     <i class="fa fa-snapchat w3-hover-opacity w3-text-green"></i>
     <i class="fa fa-pinterest-p w3-hover-opacity w3-text-green"></i>
