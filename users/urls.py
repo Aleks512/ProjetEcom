@@ -12,5 +12,10 @@ urlpatterns=[
     path('consultant/delete/<pk>/', views.ConsultantDelete.as_view(), name="consultant-delete"),
     path("consultants/list/", views.ConsultantListView.as_view(), name="consultant-list"),
     path("customer/inscription/",  views.SignUp.as_view(), name="signup"),
-    path('customers/list/', views.CustomerListView.as_view(), name='customers-list')
+    path('customers/list/', views.CustomerListView.as_view(), name='customers-list'),
+    #path('consultant/',views.home_consultant, name="consultant-home"),
+    #path('consultant/<str:matricule>/', views.consultant_profile, name='consultant_profile'),
+    path('consultant/<str:matricule>/',views.ConsultantHome.as_view(), name="consultant-home"),
+    #path('consultant/<str:pk>/', views.ConsultantHome.as_view(), name="consultant-home"),
+
 ]

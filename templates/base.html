@@ -65,12 +65,14 @@
                   <li><a class="dropdown-item" href="{% url 'consultant-add' %}">Ajouter un consultant dans la base</a></li>
                 </ul>
               </div>
-              {% elif user.is_employee %}
+              {% elif user.consultant %}
                 <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Intranet
                 </button>
                 <ul class="dropdown-menu dropdown-menu-dark">
+                  <li><a href="{% url 'consultant-home' matricule=request.user.consultant.matricule %}">Ma page</a></li>
+
                   <li><a class="dropdown-item" href="{% url 'category-list' %}">Categories</a></li>
                   <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item" href="{% url 'category-create' %}">Créer une categories</a></li>
@@ -122,7 +124,7 @@
 
   {% if user.is_authenticated and user.customer %}
     <h6 class="text-success mb-4" style="color: #27b547">Vous êtes, <span class="badge bg-black" style="color: #27b547">{{user.first_name}}</span> , votre consultant est  <span class="badge bg-black" style="color: #27b547">{{user.customer.consultant_applied.email}}</span> </h6>
-    <h6 class="text-success mb-4" style="color: #27b547">Vous êtes, <span class="badge bg-black" style="color: #27b547">{{user.first_name}}</span> , Consultant Ventalis</h6>
+
   {% endif %}
 </div>
 </div>

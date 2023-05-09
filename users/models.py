@@ -1,6 +1,7 @@
 import random
 import string
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.contrib.auth.base_user import BaseUserManager
@@ -11,7 +12,6 @@ class CustomAccountManager(BaseUserManager):
     Custom user model manager where email is the unique identifiers
     for authentication instead of usernames.
     """
-
     def create_user(self, email, password = None, company = None,  **extra_fields):
         """
         Create and save a user with the given email and password.
@@ -89,9 +89,11 @@ class Consultant(NewUser):
 
     def get_clients_count(self):
         return self.clients.count()
-    def get_absolute_url(self):
-        return '/consultant/list'
 
+    def get_absolute_url(self):
+        return reverse('consultant-home', kwargs={'matricule': self.matricule})
+    # def get_absolute_url(self):
+    #     return '/consultant/list'
 
 class Customer(NewUser):
     consultant_applied = models.ForeignKey('Consultant', on_delete=models.CASCADE, null=True, related_name='clients')

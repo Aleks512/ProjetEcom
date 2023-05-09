@@ -2,11 +2,13 @@ from django.forms import PasswordInput
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import generic
-from django.views.generic import ListView, TemplateView
+from django.views.generic import ListView, TemplateView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+
+from eshop.models import Order, Product, Category, Cart
 from .forms import ConsultantCreationForm, CustomerCreationForm
-from .models import Consultant, Customer
+from .models import Consultant, Customer, NewUser
 from django.db import models
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.mixins import UserPassesTestMixin
@@ -21,6 +23,66 @@ def presentation(request):
 
     return render(request, "presentation.html")
 
+def home_consultant(request):
+
+    return render(request, 'users/home_consultant.html')
+
+class ConsultantHome(UserPassesTestMixin, DetailView):
+    model = Consultant
+    template_name = "users/home_consultant.html"
+    fields = '__all__'
+
+    def test_func(self):
+        # Vérifier si l'utilisateur en cours est authentifié et superutilisateur
+        return self.request.user.is_authenticated and self.request.user.consultant
+
+    def get_object(self, queryset=None):
+        # Récupérer l'objet Consultant avec le matricule correspondant
+        matricule = self.request.user.consultant.matricule
+        return Consultant.objects.get(matricule=matricule)
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     consultant = self.get_object()
+    #     clients = consultant.clients.all()
+    #     context['clients'] = clients
+    #     return context
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     consultant = self.get_object()
+    #     clients = consultant.clients.all()
+    #     client_orders = {}
+    #     for client in clients:
+    #         cart = client.cart
+    #         orders = cart.orders.all()
+    #         client_orders[client] = [(order.product.name, order.quantity, order.ordered) for order in orders]
+    #     context['clients'] = clients
+    #     context['client_orders'] = client_orders
+    #     return context
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     consultant = self.get_object()
+    #     clients = consultant.clients.all()
+    #     carts = {}
+    #     for client in clients:
+    #         try:
+    #             carts[client] = client.cart
+    #
+    #         except Cart.DoesNotExist:
+    #             carts[client] = Cart.objects.create(user=client)
+    #     context['clients'] = carts
+    #     return context
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        consultant = self.get_object()
+        clients = consultant.clients.all()
+        carts = {}
+        for client in clients:
+            cart, created = Cart.objects.get_or_create(user=client)
+            carts[client] = cart
+        context['clients'] = carts
+        return context
 class ConsultantCreateView(UserPassesTestMixin,CreateView):
     template_name = 'users/consultant_create.html'
     form_class = ConsultantCreationForm

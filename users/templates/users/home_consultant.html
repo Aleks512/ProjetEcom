@@ -1,3 +1,26 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
-CONSULTANT PAGE TO BE IMPLEMENTED
+{% block content %}
+  <h1>Page d'accueil du consultant</h1>
+  <p>Bienvenue, {{ object.user_name }}!</p>
+
+  <h2>Liste de vos clients:</h2>
+  <ul>
+  {% for client, cart in clients.items %}
+    <li>{{ client.user_name }}</li>
+    {% if cart %}
+      <ul>
+        <li>Commande en cours:</li>
+        <ul>
+          {% for order in cart.orders.all %}
+            <li>{{ order.product.name }} - {{ order.quantity }} - {% if order.ordered %}Commandé{% else %}En attente{% endif %}</li>
+          {% endfor %}
+        </ul>
+      </ul>
+    {% else %}
+      <p>Aucune commande en cours pour ce client</p>
+    {% endif %}
+  {% endfor %}
+  </ul>
+{% endblock %}
+
