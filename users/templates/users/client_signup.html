@@ -2,20 +2,26 @@
 
 {% block content %}
 
-<div class="container mt-5">
-    <div class="col-md-5 mx-auto">
-        <div class="card-header" style="background-color: #000000; color: #27b547;">
-            <h4>S'inscrire</h4>
+<div class="container-fluid text-light" style="height: 90vh;">
+  <div class="row justify-content-center align-items-center h-100">
+    <div class="col-md-5">
+      <div class="card bg-light text-dark">
+        <div class="card-header bg-dark text-light">
+          <h4 class="vert-clair">S'inscrire</h4>
         </div>
-        <form method="post" class="border rounded p-4" style="background-color: #f8f9fa;">
+        <div class="card-body">
+          <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
-
             <div class="text-center mt-4">
-                <button type="submit" class="btn btn-primary" style="background-color: #009042;">Envoyer</button>
+              <button type="submit" class="btn btn-success custom-btn" style="background-color: #27b547; border-color: #27b547;">Envoyer</button>
             </div>
-        </form>
+          </form>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 {% endblock %}
+
