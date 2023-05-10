@@ -1,20 +1,25 @@
-{% extends 'base.html'%}
-
+{% extends "base.html" %}
 
 {% block content %}
-
-{% for message in messages %}
-    {{ message }}
-{% endfor %}
-
-
-<h2>{{ product.name }}</h2>
-<h3>{{product.unit_price}} €</h3>
-<img src="{{product.image.url}}" alt="{{product.name}}" style="max-width: 25%; height: auto;">
-<p>{{product.description}}</p>
-<p>{{ product.stock }} pièces en stock</p>
-
-
-<p><a href="{% url 'add-to-cart' product.slug %}">Ajouter l'article dans la panier</a></p>
-
-{% endblock%}
+  <div class="container-fluid text-light" style="height: 90vh;">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-md-8">
+        <div class="card bg-light text-dark">
+          <div class="card-header bg-dark text-light">
+            <h4 class="vert-clair">{{ product.name }}</h4>
+          </div>
+          <div class="card-body">
+            {% for message in messages %}
+              <div class="alert alert-info">{{ message }}</div>
+            {% endfor %}
+            <h3>{{ product.unit_price }} €</h3>
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width: 25%; height: auto;">
+            <p>{{ product.description }}</p>
+            <p>{{ product.stock }} pièces en stock</p>
+            <p><a href="{% url 'add-to-cart' product.slug %}" class="btn btn-success custom-btn" style="background-color: #27b547; border-color: #27b547;">Ajouter au panier</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

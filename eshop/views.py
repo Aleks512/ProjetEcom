@@ -3,6 +3,7 @@ from django.http import HttpResponseForbidden
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.contrib import messages
+from django.utils import timezone
 from django.views.generic import UpdateView, DeleteView
 
 from eshop.models import Product, Cart, Order, Category
@@ -153,11 +154,22 @@ def cart(request):
     return render(request, "eshop/cart.html", context={"orders":orders, "total_price":total_price})
 
 
+@login_required
 def cart_delete(request):
     if cart:=request.user.customer.cart:
         cart.orders.all().delete()
         cart.delete()
-    return redirect("home")
+    return redirect("cart")
 
+@login_required
+def checkout(request):
+    cart = Cart.objects.get(user=request.user)
+    for order in cart.orders.all():
+        order.ordered = True
+        order.ordered_date = timezone.now()
+        order.save()
+    cart.orders.clear()
+    messages.success(request, 'Votre commande a été passée avec succès. Merci!')
+    return redirect(reverse('cart'))
 
 

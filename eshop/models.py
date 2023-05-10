@@ -48,10 +48,24 @@ class Product(models.Model):
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
+
+QUANTITY_CHOICES = (
+    (1000, '1000'),
+    (2000, '2000'),
+    (3000, '3000'),
+    (4000, '4000'),
+    (5000, '5000'),
+    (6000, '6000'),
+    (7000, '7000'),
+    (8000, '8000'),
+    (9000, '9000'),
+    (10000, '10000'),
+    # ...
+)
 class Order(models.Model):
     user = models.ForeignKey('users.Customer', on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.IntegerField(default=1000)
+    quantity = models.IntegerField(choices=QUANTITY_CHOICES, default=1000)
     ordered = models.BooleanField(default=False)
     ordered_date = models.DateTimeField(blank=True, null=True)
 
@@ -72,7 +86,7 @@ class Cart(models.Model):
 
 
     def __str__(self):
-        return f"Client-{self.user.is_client} {self.user.user_name}"
+        return f"Client-{self.user.first_name} {self.user.user_name}"
 
     def delete(self, *args, **kwargs):
         for order in self.orders.all():

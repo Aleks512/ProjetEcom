@@ -35,7 +35,9 @@
             </tbody>
           </table>
     <h3 style="background-color: #000000; color: #27b547;">Prix total du panier : {{ total_price }} € </h3>
-    <a href="{% url 'cart-delete' %}" class="btn btn-primary" style="background-color: #27b547;">Commander</a>
+<!--    <a href="{% url 'cart-delete' %}" class="btn btn-primary" style="background-color: #27b547;">Commander</a>-->
+          <a href="{% url 'checkout' %}" class="btn btn-success" style="background-color: #27b547;">Payer</a>
+          <a href="{% url 'cart-delete' %}" class="btn btn-danger" style="background-color: #27b547;">Vider le panier</a>
 
         </div>
       </div>

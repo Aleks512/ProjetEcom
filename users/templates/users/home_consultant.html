@@ -1,26 +1,44 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Page d'accueil du consultant</h1>
-  <p>Bienvenue, {{ object.user_name }}!</p>
+  <div class="container-fluid text-light" style="height: 90vh;">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-md-8">
+        <div class="card bg-light text-dark">
+          <div class="card-header bg-dark text-light">
+            <h4 class="vert-clair">Page d'accueil du consultant</h4>
+          </div>
+          <div class="card-body">
+            <h2>Liste de vos clients :</h2>
+            <ul>
+              {% for client, cart in clients.items %}
+                <li>{{ client.first_name }} {{ client.last_name }}</li>
+                {% if cart %}
+                  <ul>
+                    {% for order in cart.orders.all %}
+                    <li>{{ order.product.name }} - {{ order.quantity }} - En attente</li>
+                      {% if ordered %}
+                        {% for order in ordered %}
+                          <li>{{ order.product.name }} - {{ order.quantity }} - Commandé</li>
+                        {% endfor %}
 
-  <h2>Liste de vos clients:</h2>
-  <ul>
-  {% for client, cart in clients.items %}
-    <li>{{ client.user_name }}</li>
-    {% if cart %}
-      <ul>
-        <li>Commande en cours:</li>
-        <ul>
-          {% for order in cart.orders.all %}
-            <li>{{ order.product.name }} - {{ order.quantity }} - {% if order.ordered %}Commandé{% else %}En attente{% endif %}</li>
-          {% endfor %}
-        </ul>
-      </ul>
-    {% else %}
-      <p>Aucune commande en cours pour ce client</p>
-    {% endif %}
-  {% endfor %}
-  </ul>
+                      {% endif %}
+                    {% endfor %}
+                  </ul>
+                {% else %}
+                  <p>Aucune commande en cours pour ce client</p>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
 {% endblock %}
+
+
 

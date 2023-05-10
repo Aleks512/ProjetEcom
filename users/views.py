@@ -38,17 +38,42 @@ def presentation(request):
 #     def get_success_url(self):
 #         return '/home'
 
+# class ConsultantHome(UserPassesTestMixin, DetailView):
+#     model = Consultant
+#     template_name = "users/home_consultant.html"
+#     fields = '__all__'
+#
+#     def test_func(self):
+#         # Vérifier si l'utilisateur en cours est authentifié et superutilisateur
+#         return self.request.user.is_authenticated and self.request.user.consultant
+#
+#     def get_object(self, queryset=None):
+#         # Récupérer l'objet Consultant avec le matricule correspondant
+#         matricule = self.request.user.consultant.matricule
+#         return Consultant.objects.get(matricule=matricule)
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         consultant = self.get_object()
+#         clients = consultant.clients.all()
+#         carts = {}
+#         for client in clients:
+#             cart, created = Cart.objects.get_or_create(user=client)
+#             ordered = Order.objects.filter(ordered=True)
+#             carts[client] = cart
+#         context['clients'] = carts
+#         context['ordered'] = ordered
+#         return context
+
 class ConsultantHome(UserPassesTestMixin, DetailView):
     model = Consultant
     template_name = "users/home_consultant.html"
     fields = '__all__'
 
     def test_func(self):
-        # Vérifier si l'utilisateur en cours est authentifié et superutilisateur
         return self.request.user.is_authenticated and self.request.user.consultant
 
     def get_object(self, queryset=None):
-        # Récupérer l'objet Consultant avec le matricule correspondant
         matricule = self.request.user.consultant.matricule
         return Consultant.objects.get(matricule=matricule)
 
@@ -59,9 +84,30 @@ class ConsultantHome(UserPassesTestMixin, DetailView):
         carts = {}
         for client in clients:
             cart, created = Cart.objects.get_or_create(user=client)
+            ordered = Order.objects.filter(ordered=True)
             carts[client] = cart
         context['clients'] = carts
+        context['ordered'] = ordered
         return context
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     consultant = self.get_object()
+    #     clients = consultant.clients.all()
+    #     client_data = []
+    #     for client in clients:
+    #         cart, created = Cart.objects.get_or_create(user=client)
+    #         ordered = Order.objects.filter(ordered=True, cart=cart)
+    #         waiting = Order.objects.filter(ordered=False, cart=cart)
+    #         client_data.append({
+    #             'client': client,
+    #             'cart': cart,
+    #             'ordered': ordered,
+    #             'waiting': waiting,
+    #         })
+    #     context['clients'] = client_data
+    #     return context
+
 class ConsultantCreateView(UserPassesTestMixin,CreateView):
     template_name = 'users/consultant_create.html'
     form_class = ConsultantCreationForm
