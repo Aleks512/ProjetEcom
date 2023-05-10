@@ -1,9 +1,6 @@
 {% extends 'base.html' %}
-
-
-
+{% load static %}
 {% block content %}
-
 
 {% if messages %}
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -14,21 +11,38 @@
     </div>
 {% endif %}
 
-<div class="row">
-
-{% for category in categories %}
-    <div class="col-md-4">
-        <div class="card mb-4 shadow-sm">
-            <div class="card-body">
-                <h4 class="card-title">{{ category.name }}</h4>
-                <a href="{% url 'product_list_by_category' category.slug %}" class="btn btn-success">Voir les produits</a>
-                <a href="{% url 'category-update' category.slug %}" class="btn btn-secondary">Modifier</a>
-                <a href="{% url 'category-delete' category.slug %}" class="btn btn-danger">Supprimer</a>
-            </div>
+  color: #777;
+  color: #777;
+<div class="container-fluid text-light" style="background-color: #f8f9fa; height: 90vh; font-family: 'Lato', sans-serif; color: #777;">
+  <div class="row justify-content-center align-items-center h-100">
+    <div class="col-md-8">
+      <div class="card border-0 shadow-lg">
+        <div class="card-header" style="background-color: #000000; color: #27b547;">
+          <h4>Liste des catégories</h4>
         </div>
+        <div class="card-body">
+          <div class="row">
+
+            {% for category in categories %}
+              <div class="col-md-4">
+                  <div class="card mb-4 shadow-sm">
+                      <div class="card-body" style="font-family: 'Lato', sans-serif; color: #777;">
+                          <h4 class="card-title">{{ category.name }}</h4>
+                          <a href="{% url 'product_list_by_category' category.slug %}" class="btn btn-success">Voir les produits</a>
+                          <a href="{% url 'category-update' category.slug %}" class="btn btn-secondary">Modifier</a>
+                          <a href="{% url 'category-delete' category.slug %}" class="btn btn-danger">Supprimer</a>
+                      </div>
+                  </div>
+              </div>
+            {% endfor %}
+
+          </div>
+        </div>
+      </div>
     </div>
-{% endfor %}
+  </div>
 </div>
+
 {% endblock %}
 
 
