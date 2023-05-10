@@ -1,5 +1,6 @@
 from django import forms
-from .models import Category, Product
+from .models import Category, Product, Order
+
 
 class CategoryCreateForm(forms.ModelForm):
     class Meta:
@@ -30,7 +31,7 @@ class CategoryDeleteForm(forms.ModelForm):
         model = Category
         fields = []
 
-
+# --------------- Products---------------------------
 class ProductCreateForm(forms.ModelForm):
     class Meta:
         model = Product
@@ -57,3 +58,14 @@ class ProductDeleteForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = []
+
+# ------------ Orders --------------------
+class OrderUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = ('product', 'quantity')
+
+class OrderDeleteForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = '__all__'

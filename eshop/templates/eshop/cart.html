@@ -28,6 +28,8 @@
                   <td>{{ order.product.unit_price }}</td>
                   <td>{{ order.quantity }}</td>
                   <td>{{ order.price }}</td>
+                  <td><a href="{% url 'order-update' order.id %}"><button>Modifier</button></a></td>
+                  <td><a href="{% url 'order-delete' order.id %}"><button>Supprimer</button></a></td>
                 </tr>
               {% endfor %}
             </tbody>

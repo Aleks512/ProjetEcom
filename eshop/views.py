@@ -3,9 +3,26 @@ from django.http import HttpResponseForbidden
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.contrib import messages
+from django.views.generic import UpdateView, DeleteView
+
 from eshop.models import Product, Cart, Order, Category
 from .forms import CategoryCreateForm, CategoryUpdateForm, CategoryDeleteForm, ProductCreateForm, ProductUpdateForm, \
     ProductDeleteForm
+
+
+class OrderUpdateView(UpdateView):
+  model= Order
+  template_name= "eshop/order_update.html"
+  fields = ('product', 'quantity',)
+
+  def get_success_url(self):
+      return '/cart'
+class OrderDeleteView(DeleteView):
+    model = Order
+    template_name = "eshop/order_delete.html"
+    fields = '__all__'
+    def get_success_url(self):
+        return '/cart'
 
 
 def category_list(request):

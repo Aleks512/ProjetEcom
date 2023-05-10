@@ -23,9 +23,20 @@ def presentation(request):
 
     return render(request, "presentation.html")
 
-def home_consultant(request):
-
-    return render(request, 'users/home_consultant.html')
+# class OrderUpdateView(UpdateView):
+#   model= Order
+#   template_name= "eshop/order_update.html"
+#   fields = ('product', 'quantity',)
+#
+#   def get_success_url(self):
+#       return '/home'
+# class OrderDeleteView(DeleteView):
+#     model = Order
+#     template_name = "eshop/order_delete.html"
+#     fields = '__all__'
+#
+#     def get_success_url(self):
+#         return '/home'
 
 class ConsultantHome(UserPassesTestMixin, DetailView):
     model = Consultant
@@ -40,38 +51,6 @@ class ConsultantHome(UserPassesTestMixin, DetailView):
         # Récupérer l'objet Consultant avec le matricule correspondant
         matricule = self.request.user.consultant.matricule
         return Consultant.objects.get(matricule=matricule)
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     consultant = self.get_object()
-    #     clients = consultant.clients.all()
-    #     context['clients'] = clients
-    #     return context
-
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     consultant = self.get_object()
-    #     clients = consultant.clients.all()
-    #     client_orders = {}
-    #     for client in clients:
-    #         cart = client.cart
-    #         orders = cart.orders.all()
-    #         client_orders[client] = [(order.product.name, order.quantity, order.ordered) for order in orders]
-    #     context['clients'] = clients
-    #     context['client_orders'] = client_orders
-    #     return context
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     consultant = self.get_object()
-    #     clients = consultant.clients.all()
-    #     carts = {}
-    #     for client in clients:
-    #         try:
-    #             carts[client] = client.cart
-    #
-    #         except Cart.DoesNotExist:
-    #             carts[client] = Cart.objects.create(user=client)
-    #     context['clients'] = carts
-    #     return context
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
