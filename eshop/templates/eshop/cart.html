@@ -2,34 +2,44 @@
 
 {% block content %}
 
+<div class="container-fluid text-light" style="background-color: #f8f9fa; height: 90vh;">
+  <div class="row justify-content-center align-items-center h-100">
+    <div class="col-md-8">
+      <div class="card border-0 shadow-lg">
+        <div class="card-header" style="background-color: #000000; color: #27b547;">
+          <h4>Panier de {{user.customer.first_name}} {{user.customer.last_name}}</h4>
+        </div>
+        <div class="card-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Photo</th>
+                <th>Produit</th>
+                <th>Prix unitaire</th>
+                <th>Quantité</th>
+                <th>Prix</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for order in orders %}
+                <tr>
+                  <td><img src="{{order.product.image.url}}" alt="{{order.product.name}}" style="max-width: 10%; height: auto;"></td>
+                  <td>{{ order.product.name }}</td>
+                  <td>{{ order.product.unit_price }}</td>
+                  <td>{{ order.quantity }}</td>
+                  <td>{{ order.price }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
 
+          <h3>Prix total du panier : {{ total_price }} €</h3>
 
- <h1>Panier de {{user.customer.first_name}} {{user.customer.last_name}}</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>Photo</th>
-        <th>Produit</th>
-        <th>Prix unitaire</th>
-        <th>Quantité</th>
-        <th>Prix</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for order in orders %}
-        <tr>
-          <td><img src="{{order.product.image.url}}" alt="{{order.product.name}}" style="max-width: 10%; height: auto;"></td>
-          <td>{{ order.product.name }}</td>
-          <td>{{ order.product.unit_price }}</td>
-          <td>{{ order.quantity }}</td>
-          <td>{{ order.price }}</td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-
-<h3>Prix total du panier : {{ total_price }} €</h3>
-
-<a href="{% url 'cart-delete' %}">Supprimer le panier</a>
+          <a href="{% url 'cart-delete' %}" class="btn btn-primary" style="background-color: #27b547;">Commander</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}
