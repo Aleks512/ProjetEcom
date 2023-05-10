@@ -32,10 +32,9 @@
               {% endfor %}
             </tbody>
           </table>
+    <h3 style="background-color: #000000; color: #27b547;">Prix total du panier : {{ total_price }} € </h3>
+    <a href="{% url 'cart-delete' %}" class="btn btn-primary" style="background-color: #27b547;">Commander</a>
 
-          <h3>Prix total du panier : {{ total_price }} €</h3>
-
-          <a href="{% url 'cart-delete' %}" class="btn btn-primary" style="background-color: #27b547;">Commander</a>
         </div>
       </div>
     </div>
