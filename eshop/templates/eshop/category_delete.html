@@ -1,17 +1,24 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
-  <h1>Supprimer la catégorie "{{ category.name }}"</h1>
-  <hr>
-  <form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-danger">Supprimer</button>
-    <a href="{% url 'category-list' %}" class="btn btn-secondary">Annuler</a>
-  </form>
-  {% if category_deleted %}
-    <div class="alert alert-success mt-3" role="alert">
-      La catégorie "{{ category.name }}" a été supprimée avec succès.
+<div class="container-fluid text-light" style="background-color: #f8f9fa; height: 90vh; font-family: 'Lato', sans-serif; color: #777;">
+  <div class="row justify-content-center align-items-center h-100">
+    <div class="col-md-8">
+      <div class="card border-0 shadow-lg">
+        <div class="card-header" style="background-color: #000000; color: #27b547;">
+          <h4>Supprimer la catégorie "{{ category.name }}"</h4>
+        </div>
+        <div class="card-body">
+          <p>Êtes-vous sûr de vouloir supprimer cette catégorie?</p>
+          <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}">
+            <button type="submit" class="btn btn-danger">Supprimer</button>
+            <a href="{% url 'category-list' %}" class="btn btn-secondary">Annuler</a>
+          </form>
+        </div>
+      </div>
     </div>
-  {% endif %}
+  </div>
+
 {% endblock %}

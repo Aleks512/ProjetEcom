@@ -1,14 +1,24 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
-  <div class="container">
-    <h1 class="mb-4">Modifier la catégorie "{{ object.name }}"</h1>
-    <form method="post">
-      {% csrf_token %}
-      {{ form.as_p }}
+<div class="container-fluid text-light" style="background-color: #f8f9fa; height: 90vh; font-family: 'Lato', sans-serif; color: #777;">
+  <div class="row justify-content-center align-items-center h-100">
+    <div class="col-md-8">
+      <div class="card border-0 shadow-lg">
+        <div class="card-header" style="background-color: #000000; color: #27b547;">
+          <h4>Modifier la catégorie "{{ category.name }}"</h4>
+        </div>
+        <div class="card-body">
+          <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
 
-      <button type="submit" class="btn btn-success">Enregistrer</button>
-      <a href="{% url 'category-list' %}" class="btn btn-secondary">Annuler</a>
-    </form>
+            <button type="submit" class="btn btn-success">Enregistrer</button>
+            <a href="{% url 'category-list' %}" class="btn btn-secondary">Annuler</a>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
+</div>
 {% endblock %}
