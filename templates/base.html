@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 
-<body">
+<body>
   <header>
     <div class="row">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -71,20 +71,18 @@
                   Intranet
                 </button>
                 <ul class="dropdown-menu dropdown-menu-dark">
-                  <li><a href="{% url 'consultant-home' matricule=request.user.consultant.matricule %}">Ma page</a></li>
-
-                  <li><a class="dropdown-item" href="{% url 'category-list' %}">Categories</a></li>
+                  <li><a class="dropdown-item" href="{% url 'consultant-home' matricule=request.user.consultant.matricule %}">Ma page</a></li>
                   <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="{% url 'category-list' %}">Gestion de categories</a></li>
                   <li><a class="dropdown-item" href="{% url 'category-create' %}">Créer une categories</a></li>
                   <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="{% url 'products-list-mng' %}">Produits</a></li>
-                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="{% url 'products-list-mng' %}">Gestion de produits</a></li>
                   <li><a class="dropdown-item" href="{% url 'product-create' %}">Ajouter un produit</a></li>
                 </ul>
               </div>
-              {% elif user.is_customer %}
+              {% elif user.customer %}
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Mon espace</a>
+                  <a class="nav-link" href="{% url 'customer-home' id=request.user.customer.id %}">Mon espace</a>
                 </li>
               {% endif %}
               <li class="nav-item">

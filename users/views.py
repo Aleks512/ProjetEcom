@@ -23,48 +23,29 @@ def presentation(request):
 
     return render(request, "presentation.html")
 
-# class OrderUpdateView(UpdateView):
-#   model= Order
-#   template_name= "eshop/order_update.html"
-#   fields = ('product', 'quantity',)
-#
-#   def get_success_url(self):
-#       return '/home'
-# class OrderDeleteView(DeleteView):
-#     model = Order
-#     template_name = "eshop/order_delete.html"
-#     fields = '__all__'
-#
-#     def get_success_url(self):
-#         return '/home'
+class CustomerHome(UserPassesTestMixin, DetailView):
+    model = Customer
+    template_name = "users/my_orders.html"
+    fields = '__all__'
 
-# class ConsultantHome(UserPassesTestMixin, DetailView):
-#     model = Consultant
-#     template_name = "users/home_consultant.html"
-#     fields = '__all__'
-#
-#     def test_func(self):
-#         # Vérifier si l'utilisateur en cours est authentifié et superutilisateur
-#         return self.request.user.is_authenticated and self.request.user.consultant
-#
-#     def get_object(self, queryset=None):
-#         # Récupérer l'objet Consultant avec le matricule correspondant
-#         matricule = self.request.user.consultant.matricule
-#         return Consultant.objects.get(matricule=matricule)
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         consultant = self.get_object()
-#         clients = consultant.clients.all()
-#         carts = {}
-#         for client in clients:
-#             cart, created = Cart.objects.get_or_create(user=client)
-#             ordered = Order.objects.filter(ordered=True)
-#             carts[client] = cart
-#         context['clients'] = carts
-#         context['ordered'] = ordered
-#         return context
+    def test_func(self):
+        return self.request.user.is_authenticated and self.request.user.customer
 
+    def get_object(self, queryset=None):
+        id = self.request.user.customer.id
+        return Customer.objects.get(id=id)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        customer = self.get_object()
+        orders = customer.order_set.all()
+        ordered_orders = customer.order_set.filter(ordered=True)
+        unordered_orders = customer.order_set.filter(ordered=False)
+        context['ordered_orders'] = ordered_orders #querySet
+        context['unordered_orders'] = unordered_orders #querySet
+        context['orders'] = orders
+
+        return context
 class ConsultantHome(UserPassesTestMixin, DetailView):
     model = Consultant
     template_name = "users/home_consultant.html"

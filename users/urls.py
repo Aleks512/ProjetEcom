@@ -16,6 +16,7 @@ urlpatterns=[
     #path('consultant/',views.home_consultant, name="consultant-home"),
     #path('consultant/<str:matricule>/', views.consultant_profile, name='consultant_profile'),
     path('consultant/<str:matricule>/',views.ConsultantHome.as_view(), name="consultant-home"),
+    path('customer/<int:id>/',views.CustomerHome.as_view(), name="customer-home"),
     #path('consultant/<str:pk>/', views.ConsultantHome.as_view(), name="consultant-home"),
 
 ]

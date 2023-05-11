@@ -1,10 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid" style=" height: 90vh;">
+  <div class="row justify-content-center align-items-center h-100">
+    <div class="col-md-8">
+      <div class="card border-0 shadow-lg">
+        <div class="card-header" style="background-color: #000000; color: #27b547;">
+          <h4>Bonjour {{object.first_name}}</h4>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Commandes payées</h5>
+          <ul class="list-group">
+            {%for order in ordered_orders%}
+            <li class="list-group-item">{{order}} - payé</li>
+            {% endfor %}
+          </ul>
+
+          <h5 class="card-title">Commandes en cours</h5>
+          <ul class="list-group">
+            {% if unordered_orders%}
+            {%for order in unordered_orders%}
+            <li class="list-group-item">{{order}} - en cours</li>
+            {% endfor %}
+            {% else%}
+            <li class="list-group-item">Aucune commande - en cours</li>
+            {% endif%}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
