@@ -170,6 +170,6 @@ def checkout(request):
         order.save()
     cart.orders.clear()
     messages.success(request, 'Votre commande a été passée avec succès. Merci!')
-    return redirect(reverse('cart'))
+    return redirect(reverse('products'))
 
 
