@@ -81,14 +81,34 @@ class ConsultantHome(UserPassesTestMixin, DetailView):
         context = super().get_context_data(**kwargs)
         consultant = self.get_object()
         clients = consultant.clients.all()
-        carts = {}
-        for client in clients:
-            cart, created = Cart.objects.get_or_create(user=client)
-            ordered = Order.objects.filter(ordered=True)
-            carts[client] = cart
-        context['clients'] = carts
-        context['ordered'] = ordered
+        context['clients'] = clients
         return context
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     consultant = self.get_object()
+    #     clients = consultant.clients.all()
+    #     for client in clients:
+    #         orders = client.order_set.all()
+    #         for order in orders:
+    #             ordered = client.order_set.filter(ordered=True)
+    #             not_ordered = client.order_set.filter(ordered=False)
+    #             context['ordered'] = ordered
+    #     return context
+
+
+
+
+
+
+        # carts = {}
+        # for client in clients:
+        #     cart, created = Cart.objects.get_or_create(user=client)
+        #     ordered = Order.objects.filter(ordered=True)
+        #     carts[client] = cart
+        # context['clients'] = carts
+        # context['ordered'] = ordered
+        # return context
 
     # def get_context_data(self, **kwargs):
     #     context = super().get_context_data(**kwargs)

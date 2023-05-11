@@ -1,44 +1,70 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <div class="container-fluid text-light" style="height: 90vh;">
-    <div class="row justify-content-center align-items-center h-100">
-      <div class="col-md-8">
-        <div class="card bg-light text-dark">
-          <div class="card-header bg-dark text-light">
-            <h4 class="vert-clair">Page d'accueil du consultant</h4>
-          </div>
-          <div class="card-body">
-            <h2>Liste de vos clients :</h2>
-            <ul>
-              {% for client, cart in clients.items %}
-                <li>{{ client.first_name }} {{ client.last_name }}</li>
-                {% if cart %}
-                  <ul>
-                    {% for order in cart.orders.all %}
-                    <li>{{ order.product.name }} - {{ order.quantity }} - En attente</li>
-                      {% if ordered %}
-                        {% for order in ordered %}
-                          <li>{{ order.product.name }} - {{ order.quantity }} - Commandé</li>
-                        {% endfor %}
-
-                      {% endif %}
-                    {% endfor %}
-                  </ul>
-                {% else %}
-                  <p>Aucune commande en cours pour ce client</p>
-                {% endif %}
+{%if clients%}
+<div class="container-fluid text-light" style="background-color: #f8f9fa; height: 90vh;">
+  <div class="row justify-content-center align-items-center h-100">
+    <div class="col-md-8">
+      <div class="card border-0 shadow-lg">
+        <div class="card-header" style="background-color: #000000; color: #27b547;">
+          <h4>Liste des commandes</h4>
+        </div>
+        <div class="card-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Client</th>
+                <th>Produit</th>
+                <th>Prix unitaire</th>
+                <th>Quantité</th>
+                <th>Prix</th>
+                <th>Statut</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for client in clients %}
+                {% for item in client.order_set.all %}
+                  <tr>
+                    {% if forloop.first %}
+                      <td rowspan="{{ client.order_set.count }}">{{ client.company }}</td>
+                    {% endif %}
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.product.unit_price }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.price }}</td>
+                    {% if item.ordered %}
+                      <td>Commandé</td>
+                    {% else %}
+                      <td>En attente</td>
+                    {% endif %}
+                  </tr>
+                {% empty %}
+                  <tr>
+                    {% if forloop.first %}
+                      <td rowspan="{{ client.order_set.count }}">{{ client.company }}</td>
+                    {% endif %}
+                    <td colspan="5">Aucune commande</td>
+                  </tr>
+                {% endfor %}
+              {% empty %}
+                <tr>
+                  <td colspan="6">Aucun client pour le moment</td>
+                </tr>
               {% endfor %}
-            </ul>
-          </div>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </div>
-
-
-
+</div>
+{% else %}
+<div>
+  Aucun client pour le moment
+</div>
+{% endif %}
 {% endblock %}
+
 
 
 

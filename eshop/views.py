@@ -159,7 +159,7 @@ def cart_delete(request):
     if cart:=request.user.customer.cart:
         cart.orders.all().delete()
         cart.delete()
-    return redirect("cart")
+    return redirect("products")
 
 @login_required
 def checkout(request):
