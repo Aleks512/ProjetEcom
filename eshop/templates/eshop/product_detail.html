@@ -15,7 +15,6 @@
             <h3>{{ product.unit_price }} €</h3>
             <img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width: 25%; height: auto;">
             <p>{{ product.description }}</p>
-            <p>{{ product.stock }} pièces en stock</p>
             <p><a href="{% url 'add-to-cart' product.slug %}" class="btn btn-success custom-btn" style="background-color: #27b547; border-color: #27b547;">Ajouter au panier</a></p>
           </div>
         </div>

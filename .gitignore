@@ -133,4 +133,5 @@ commands.txt
 files
 
 staticfiles/
+ventalis/.env
 

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid text-light" style="height: 90vh;">
+  <div class="row justify-content-center align-items-center h-100">
+    <div class="col-md-5">
+      <div class="card border-0 shadow-lg">
+      <div class="card bg-light text-dark">
+        <div class="card-header bg-black" style="color: #0d9c43">
+           <p>Passez prendre un  <i class="fa fa-coffee"></i>,  ou laissez-nous un message :</p>
+        </div>
+        <div class="card-body">
+          <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="text-center mt-4">
+              <button type="submit" class="btn btn-success custom-btn" style="background-color: #27b547; border-color: #27b547;">Envoyer</button>
+            </div>
+          </form>
+        </div>
+      </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
