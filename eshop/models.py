@@ -95,3 +95,12 @@ class Cart(models.Model):
             order.save()
         self.orders.clear()
         super().delete(*args, **kwargs)
+
+class OrderComment(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='comments')
+    employee = models.ForeignKey('users.Consultant', on_delete=models.CASCADE)
+    comment = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Comment by {self.employee.first_name} on order {self.order.product.name} ({self.order.quantity})"
