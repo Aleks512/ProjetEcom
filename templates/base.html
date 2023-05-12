@@ -43,7 +43,7 @@
               <a class="nav-link" href="{% url 'products' %}">Catalogue des prestations</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Contact</a>
+              <a class="nav-link" href="{% url 'contact:contact' %}">Contact</a>
             </li>
           </ul>
           <ul class="navbar-nav ms-auto">
@@ -145,15 +145,25 @@
       {% endblock %}
     </div>
 
-<footer class="w3-center w3-black w3-padding-64">
-  <div class="w3-xlarge w3-section">
-    <i class="fa fa-facebook-official w3-hover-opacity w3-text-GREEN"></i>
-    <i class="fa fa-instagram w3-hover-opacity w3-text-green"></i>
-    <i class="fa fa-snapchat w3-hover-opacity w3-text-green"></i>
-    <i class="fa fa-pinterest-p w3-hover-opacity w3-text-green"></i>
-    <i class="fa fa-twitter w3-hover-opacity w3-text-green"></i>
-    <i class="fa fa-linkedin w3-hover-opacity w3-text-green"></i>
+<footer class="bg-black py-5 vert-clair">
+  <div class="container vert-clair">
+    <h3 class="text-center mb-4">OÙ SOMMES NOUS</h3>
+    <div class="row justify-content-center">
+      <div class="col-md-4 text-center">
+        <i class="fa fa-map-marker fa-fw fa-2x vert-clair"></i>
+        <p class="lead mb-0">Paris, FRANCE</p>
+      </div>
+      <div class="col-md-4 text-center">
+        <i class="fa fa-phone fa-fw fa-2x vert-clair"></i>
+        <p class="lead mb-0">Téléphone: +33 123456789</p>
+      </div>
+      <div class="col-md-4 text-center">
+        <i class="fa fa-envelope fa-fw fa-2x vert-clair"></i>
+        <p class="lead mb-0">Email: ventalis1602@gmail.com</p>
+      </div>
+    </div>
   </div>
 </footer>
+
 </body>
 </html>

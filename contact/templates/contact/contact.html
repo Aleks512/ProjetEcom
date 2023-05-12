@@ -13,7 +13,7 @@
         <div class="card-body">
           <form method="post">
             {% csrf_token %}
-            {{ form.as_p }}
+            {{ form.as_p}}
             <div class="text-center mt-4">
               <button type="submit" class="btn btn-success custom-btn" style="background-color: #27b547; border-color: #27b547;">Envoyer</button>
             </div>
@@ -24,5 +24,6 @@
     </div>
   </div>
 </div>
+
 
 {% endblock %}
