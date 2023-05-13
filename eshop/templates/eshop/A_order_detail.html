@@ -1,0 +1,28 @@
+<h1>Order details</h1>
+<p>Product: {{ order.product }}</p>
+<p>Quantity: {{ order.quantity }}</p>
+
+<h2>Commentaires des employés de Ventalis</h2>
+{% if order.comments.all %}
+    <ul>
+        {% for comment in order.comments.all %}
+            <li>{{ comment }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Aucun commentaire pour cette commande.</p>
+{% endif %}
+
+<h2>Update order</h2>
+<form method="POST">
+  {% csrf_token %}
+  {{ order_form.as_p }}
+  <button type="submit">Update</button>
+</form>
+
+<h2>Add comment</h2>
+<form method="POST">
+  {% csrf_token %}
+  {{ comment_form.as_p }}
+  <button type="submit">Add comment</button>
+</form>

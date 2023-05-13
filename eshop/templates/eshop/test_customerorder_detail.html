@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+<h1>Commande n°{{ order.pk }}</h1>
+<h2>Informations de la commande</h2>
+<ul>
+    <li>Produit: {{ order.product.name }}</li>
+    <li>Quantité: {{ order.quantity }}</li>
+    <li>Prix unitaire: {{ order.price }}</li>
+    <li>Prix unitaire: {{ order.commentaire }}</li>
+    <!-- Autres informations de la commande -->
+</ul>
+
+<h2>Commentaires des employés de Ventalis</h2>
+{% if order.comments.all %}
+    <ul>
+        {% for comment in order.comments.all %}
+            <li>{{ comment }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Aucun commentaire pour cette commande.</p>
+{% endif %}
+{% endblock %}

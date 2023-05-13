@@ -19,8 +19,19 @@ urlpatterns = [
     path('product/<slug:slug>/update/', views.product_update_view, name='product-update'),
     path('product/<slug:slug>/delete/', views.product_delete_view, name='product-delete'),
     path('produits/',views.products, name="products"),
-    path('order/<pk>/update', views.OrderUpdateView.as_view(), name='order-update'),
+
+
+    # Vue pour la mise à jour de la commande par le consultant
+    path('orders/<int:pk>/update/', views.TestOrderUpdateView.as_view(), name='A_order_update'),
+    # Vue pour la visualisation des détails de la commande par le client
+    path('orders/<int:order_id>/', views.OrderDetailView.as_view(), name='order_detail'),
+
+    #path('order/<pk>/update', views.OrderUpdateView.as_view(), name='order-update'),
+    #path('consultant/order/<pk>/update', views.OrderConsultantUpdateView.as_view(), name='order-consultant-update'),
     path('order/<pk>/delete', views.OrderDeleteView.as_view(), name='order-delete'),
+
     path('cart-delete/', views.cart_delete, name='cart_delete'),
     path('checkout/', views.checkout, name='checkout'),
+
+    path('order/detail/<pk>', views.OrderDetailView.as_view(), name='order-detail'),
 ]

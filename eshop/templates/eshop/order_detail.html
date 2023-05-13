@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid" style=" height: 90vh; font-family: 'Lato', sans-serif;">
+  <div class="row justify-content-center align-items-center h-100">
+    <div class="col-md-8">
+      <div class="card border-0 shadow-lg p-4">
+        <h1 class="text-center mb-4">Commande n°{{ order.pk }}</h1>
+        <h2 class="mb-3" style="background-color: black; color: #27b547">Informations de la commande</h2>
+        <ul class="list-unstyled">
+          <li><strong>Produit:</strong> {{ order.product.name }}</li>
+          <li><strong>Quantité:</strong> {{ order.quantity }}</li>
+          <li><strong>Prix unitaire:</strong> {{ order.price }}</li>
+          <li><strong>Total de votre commande:</strong> {{ order.product.unit_price }} €</li>
+          <li><strong>Dernier commentaire du vendeur:</strong> {{ order.commentaire }}</li>
+        </ul>
+
+        <h2 class="mb-3" style="background-color: black; color: #27b547">Commentaires de votre consultant</h2>
+        {% if not order.comments.all %}
+          <p>Aucun commentaire pour cette commande.</p>
+        {% else %}
+          <ul class="list-unstyled">
+            {% for comment in order.comments.all %}
+              <li><strong>{{ comment }} {{ comment.created_at }}</strong></li>
+              <li>{{ comment.body }}</li>
+            <br>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+
+

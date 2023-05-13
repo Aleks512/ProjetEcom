@@ -68,6 +68,7 @@ class Order(models.Model):
     quantity = models.IntegerField(choices=QUANTITY_CHOICES, default=1000)
     ordered = models.BooleanField(default=False)
     ordered_date = models.DateTimeField(blank=True, null=True)
+    commentaire = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return f"{self.product.name} ({self.quantity})"
@@ -96,11 +97,11 @@ class Cart(models.Model):
         self.orders.clear()
         super().delete(*args, **kwargs)
 
-class OrderComment(models.Model):
+class Comment(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='comments')
-    employee = models.ForeignKey('users.Consultant', on_delete=models.CASCADE)
-    comment = models.TextField()
+    consultant = models.ForeignKey('users.Consultant', on_delete=models.CASCADE)
+    body = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Comment by {self.employee.first_name} on order {self.order.product.name} ({self.order.quantity})"
+        return f"Commentaire de {self.consultant.first_name} vontre consultant Ventalis pour la commande {self.order.product.name} ({self.order.quantity})"

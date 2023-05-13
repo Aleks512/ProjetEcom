@@ -65,49 +65,6 @@ class ConsultantHome(UserPassesTestMixin, DetailView):
         context['clients'] = clients
         return context
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     consultant = self.get_object()
-    #     clients = consultant.clients.all()
-    #     for client in clients:
-    #         orders = client.order_set.all()
-    #         for order in orders:
-    #             ordered = client.order_set.filter(ordered=True)
-    #             not_ordered = client.order_set.filter(ordered=False)
-    #             context['ordered'] = ordered
-    #     return context
-
-
-
-
-
-
-        # carts = {}
-        # for client in clients:
-        #     cart, created = Cart.objects.get_or_create(user=client)
-        #     ordered = Order.objects.filter(ordered=True)
-        #     carts[client] = cart
-        # context['clients'] = carts
-        # context['ordered'] = ordered
-        # return context
-
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     consultant = self.get_object()
-    #     clients = consultant.clients.all()
-    #     client_data = []
-    #     for client in clients:
-    #         cart, created = Cart.objects.get_or_create(user=client)
-    #         ordered = Order.objects.filter(ordered=True, cart=cart)
-    #         waiting = Order.objects.filter(ordered=False, cart=cart)
-    #         client_data.append({
-    #             'client': client,
-    #             'cart': cart,
-    #             'ordered': ordered,
-    #             'waiting': waiting,
-    #         })
-    #     context['clients'] = client_data
-    #     return context
 
 class ConsultantCreateView(UserPassesTestMixin,CreateView):
     template_name = 'users/consultant_create.html'

@@ -1,23 +1,43 @@
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db import transaction
 from django.http import HttpResponseForbidden
 from django.shortcuts import render, get_object_or_404, redirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.contrib import messages
 from django.utils import timezone
-from django.views.generic import UpdateView, DeleteView
-
+from django.views.generic import UpdateView, DeleteView, DetailView
 from eshop.models import Product, Cart, Order, Category
 from .forms import CategoryCreateForm, CategoryUpdateForm, CategoryDeleteForm, ProductCreateForm, ProductUpdateForm, \
     ProductDeleteForm
+from django.shortcuts import render, get_object_or_404
+from django.views.generic import View
+from .models import Order, Comment
+from .forms import OrderForm, CommentForm
 
 
-class OrderUpdateView(UpdateView):
+
+
+class OrderDetailView(DetailView):
+    model = Order
+    template_name = 'eshop/order_detail.html'
+    context_object_name = 'order'
+
+class OrderCustomerUpdateView(UpdateView):
   model= Order
   template_name= "eshop/order_update.html"
   fields = ('product', 'quantity',)
 
   def get_success_url(self):
       return '/cart'
+
+# class OrderConsultantUpdateView(UpdateView):
+#   model = Order
+#   template_name = "eshop/order_consultant_update.html"
+#   fields = '__all__'
+#
+#   def get_success_url(self):
+#       return '/'
 class OrderDeleteView(DeleteView):
     model = Order
     template_name = "eshop/order_delete.html"
@@ -171,5 +191,51 @@ def checkout(request):
     cart.orders.clear()
     messages.success(request, 'Votre commande a été passée avec succès. Merci!')
     return redirect(reverse('products'))
+
+
+# Vue pour la mise à jour de la commande par le consultant
+class TestOrderUpdateView(LoginRequiredMixin, UpdateView):
+    model = Order
+    fields = ['ordered', 'commentaire']
+    template_name = 'eshop/test_consultantorder_update.html'
+    success_url = reverse_lazy('home')
+
+    # On utilise une transaction atomique pour garantir la cohérence des données
+    @transaction.atomic
+    def form_valid(self, form):
+        # Récupération de l'objet Order à mettre à jour
+        order = self.get_object()
+
+        # # Si la commande est déjà traitée, on affiche un message d'erreur
+        # if order.ordered:
+        #     messages.error(self.request, "Cette commande est déjà traitée.")
+        #     return self.form_invalid(form)
+
+        # Mise à jour de l'objet Order et sauvegarde en base de données
+        response = super().form_valid(form)
+
+        # Création du commentaire
+        Comment.objects.create(
+            order=order,
+            consultant=self.request.user.consultant,
+            body=form.cleaned_data['commentaire']
+        )
+
+        # Message de confirmation
+        messages.success(self.request, "La commande a été mise à jour avec succès.")
+
+        return response
+
+
+# Vue pour la visualisation des détails de la commande par le client
+# class OrderDetailView(LoginRequiredMixin, DetailView):
+#     model = Order
+#     template_name = 'eshop/test_customerorder_detail.html'
+#     context_object_name = 'order'
+#
+#     def get_queryset(self):
+#         # On ne retourne que les commandes de l'utilisateur connecté
+#         return super().get_queryset().filter(user=self.request.user.customer)
+#
 
 

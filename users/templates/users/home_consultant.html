@@ -14,10 +14,12 @@
             <thead>
               <tr>
                 <th>Client</th>
+                <th>Commande</th>
                 <th>Produit</th>
                 <th>Prix unitaire</th>
                 <th>Quantité</th>
                 <th>Prix</th>
+                <th>Commentaire/Commenter</th>
                 <th>Statut</th>
               </tr>
             </thead>
@@ -28,10 +30,17 @@
                     {% if forloop.first %}
                       <td rowspan="{{ client.order_set.count }}">{{ client.company }}</td>
                     {% endif %}
+                    <td><a href="{% url 'order-detail' pk=item.id %}">{{ item }}</a></td>
                     <td>{{ item.product.name }}</td>
                     <td>{{ item.product.unit_price }}</td>
                     <td>{{ item.quantity }}</td>
                     <td>{{ item.price }}</td>
+                    <td>
+                      <a href="{% url 'A_order_update' item.id %}" class="btn btn-warning" style="background-color: #009042;">
+                        <i class="bi bi-pencil-fill me-2"></i>Editer
+                      </a>
+                    </td>
+<!--                    <td>{{item.comments}} ou button</td>-->
                     {% if item.ordered %}
                       <td>Commandé</td>
                     {% else %}
