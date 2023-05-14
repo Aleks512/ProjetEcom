@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.password_validation import validate_password
 from django.db import models
 
 from contact.validators import ContainsLetterValidator, ContainsNumberValidator, ContainsSpecialCharacterValidator
@@ -51,6 +52,7 @@ class CustomerCreationForm(UserCreationForm):
     email = forms.EmailField(max_length=100, required=True, label='Adresse e-mail')
     company = forms.CharField(max_length=100, required=True, label='Nom de la société')
     password1 = forms.CharField(widget=forms.PasswordInput,label='Mot de passe')
+
     password2 = forms.CharField(widget=forms.PasswordInput, label='Confirmer le mot de passe')
 
     class Meta:
