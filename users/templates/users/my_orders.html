@@ -13,7 +13,8 @@
           <h5 class="card-title">Commandes payées</h5>
           <ul class="list-group">
             {%for order in ordered_orders%}
-            <li class="list-group-item">{{order}} - payé</li>
+
+             <li class="list-group-item"><a href="{% url 'order-detail' pk=order.id %}">{{ order}} - payé</a></li>
             {% endfor %}
           </ul>
 

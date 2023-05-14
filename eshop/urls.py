@@ -20,18 +20,18 @@ urlpatterns = [
     path('product/<slug:slug>/delete/', views.product_delete_view, name='product-delete'),
     path('produits/',views.products, name="products"),
 
-
-    # Vue pour la mise à jour de la commande par le consultant
-    path('orders/<int:pk>/update/', views.TestOrderUpdateView.as_view(), name='A_order_update'),
-    # Vue pour la visualisation des détails de la commande par le client
+    # Path pour la mise à jour de la commande
+    path('orders/<int:pk>/update/', views.OrderUpdateConsultantView.as_view(), name='consultant-order-update'),#OK
+    path('order/<pk>/update', views.OrderCustomerUpdateView.as_view(), name='order-update'),#ok
+    # Path pour la visualisation des détails de la commande
     path('orders/<int:order_id>/', views.OrderDetailView.as_view(), name='order_detail'),
 
-    #path('order/<pk>/update', views.OrderUpdateView.as_view(), name='order-update'),
+
     #path('consultant/order/<pk>/update', views.OrderConsultantUpdateView.as_view(), name='order-consultant-update'),
-    path('order/<pk>/delete', views.OrderDeleteView.as_view(), name='order-delete'),
+    path('order/<pk>/delete', views.OrderDeleteView.as_view(), name='order-delete'),# a checker
 
     path('cart-delete/', views.cart_delete, name='cart_delete'),
     path('checkout/', views.checkout, name='checkout'),
 
-    path('order/detail/<pk>', views.OrderDetailView.as_view(), name='order-detail'),
+    path('order/detail/<pk>', views.OrderDetailView.as_view(), name='order-detail'),# OK
 ]

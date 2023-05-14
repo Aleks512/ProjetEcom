@@ -1,6 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+{% if messages %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{% endif %}
     {% if category %}
         <h1>{{ category.name }}</h1>
         <hr>

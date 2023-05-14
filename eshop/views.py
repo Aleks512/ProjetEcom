@@ -74,6 +74,7 @@ def category_update_view(request, slug):
     category = get_object_or_404(Category, slug=slug)
     form = CategoryUpdateForm(request.POST or None, instance=category)
     if form.is_valid():
+        messages.success(request, f'La catégorie "{category.name}" a été modifiée avec succès.')
         form.save()
         return redirect('category-list')
     return render(request, 'eshop/category_update.html', {'form': form, 'category': category})
@@ -194,10 +195,10 @@ def checkout(request):
 
 
 # Vue pour la mise à jour de la commande par le consultant
-class TestOrderUpdateView(LoginRequiredMixin, UpdateView):
+class OrderUpdateConsultantView(LoginRequiredMixin, UpdateView):
     model = Order
     fields = ['ordered', 'commentaire']
-    template_name = 'eshop/test_consultantorder_update.html'
+    template_name = 'eshop/order_update_consultant.html'
     success_url = reverse_lazy('home')
 
     # On utilise une transaction atomique pour garantir la cohérence des données
@@ -227,15 +228,6 @@ class TestOrderUpdateView(LoginRequiredMixin, UpdateView):
         return response
 
 
-# Vue pour la visualisation des détails de la commande par le client
-# class OrderDetailView(LoginRequiredMixin, DetailView):
-#     model = Order
-#     template_name = 'eshop/test_customerorder_detail.html'
-#     context_object_name = 'order'
-#
-#     def get_queryset(self):
-#         # On ne retourne que les commandes de l'utilisateur connecté
-#         return super().get_queryset().filter(user=self.request.user.customer)
-#
+
 
 
