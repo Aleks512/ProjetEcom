@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import FormView, TemplateView
+from django.core.exceptions import ValidationError
+
 
 from contact.forms import ContactForm
 
@@ -17,3 +19,8 @@ class ContactView(FormView):
 
 class ContactSuccessView(TemplateView):
     template_name = 'contact/success.html'
+
+
+
+
+

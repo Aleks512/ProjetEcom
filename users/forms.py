@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.db import models
 
+from contact.validators import ContainsLetterValidator, ContainsNumberValidator, ContainsSpecialCharacterValidator
 from .models import Consultant, Customer, NewUser
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import password_validation
@@ -44,13 +45,13 @@ class ConsultantCreationForm(forms.ModelForm):
         return cleaned_data
 
 class CustomerCreationForm(UserCreationForm):
-    user_name = forms.CharField(max_length=30, required=True)
-    first_name = forms.CharField(max_length=30, required=True)
-    last_name = forms.CharField(max_length=30, required=True)
-    email = forms.EmailField(max_length=100, required=True)
-    company = forms.CharField(max_length=100, required=True)
-    password1 = forms.CharField(widget=forms.PasswordInput)
-    password2 = forms.CharField(widget=forms.PasswordInput)
+    user_name = forms.CharField(max_length=30, required=True, label='Nom d\'utilisateur')
+    first_name = forms.CharField(max_length=30, required=True, label='Prénom')
+    last_name = forms.CharField(max_length=30, required=True, label='Nom de famille')
+    email = forms.EmailField(max_length=100, required=True, label='Adresse e-mail')
+    company = forms.CharField(max_length=100, required=True, label='Nom de la société')
+    password1 = forms.CharField(widget=forms.PasswordInput,label='Mot de passe')
+    password2 = forms.CharField(widget=forms.PasswordInput, label='Confirmer le mot de passe')
 
     class Meta:
         model = Customer
