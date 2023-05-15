@@ -34,9 +34,17 @@
                 </div>
               {% endif %}
             </div>
+
             <div class="text-center mt-4">
-              <button type="submit" class="btn btn-success custom-btn" style="background-color: #27b547; border-color: #27b547;">Submit</button>
+              <button type="submit" class="btn btn-success custom-btn" style="background-color: #27b547; border-color: #27b547;">Se connecter</button>
             </div>
+            <!-- Password Reset -->
+            <div class="container mt-4">
+              <p class="text-center">
+                <a href="{% url 'reset_password' %}">Mot de passe oublié?</a>
+              </p>
+            </div>
+
             {% if form.non_field_errors %}
               <div class="alert alert-danger mt-3" role="alert">
                 {% for error in form.non_field_errors %}
@@ -50,6 +58,7 @@
     </div>
   </div>
 </div>
+
 
 {% endblock %}
 
