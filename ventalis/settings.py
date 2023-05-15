@@ -25,7 +25,8 @@ AUTH_USER_MODEL = 'users.NewUser'
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-@am5g#=jdyr2947m_k=yg69bvu@407pfm5j_@!$5h%t6znl0a@'
+SECRET_KEY = env('SECRET_KEY')
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -138,8 +139,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 
-
-
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 STATIC_URL = '/static/'
@@ -172,5 +171,5 @@ EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 
 # Custom setting. To email
-#RECIPIENT_ADDRESS = env('RECIPIENT_ADDRESS')
+RECIPIENT_ADDRESS = env('RECIPIENT_ADDRESS')
 

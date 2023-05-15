@@ -14,7 +14,7 @@
             {% csrf_token %}
             <div class="form-group">
               <label for="username">Email</label>
-              <input type="text" class="form-control form-control-lg{% if form.username.errors %} is-invalid{% endif %}" id="username" name="username" placeholder="Email" value="{{ form.username.value }}">
+              <input type="text" class="form-control form-control-lg{% if form.username.errors %} is-invalid{% endif %}" id="username" name="username" placeholder="Email">
               {% if form.username.errors %}
                 <div class="invalid-feedback">
                   {% for error in form.username.errors %}
