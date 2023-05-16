@@ -132,6 +132,15 @@ body, html {
   line-height: 1rem;
   line-height: .8;
 }
+
+
+.list-group-item.custom-active.active,
+.list-group-item.custom-active:active,
+.list-group-item.custom-active:focus {
+    background-color: green !important;
+    color: white;
+}
+
 /*.product-card {*/
 /*  width: 100%;*/
 /*  height: 400px; !* modifier la valeur selon les besoins *!*/

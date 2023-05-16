@@ -93,7 +93,8 @@ def category_delete_view(request, slug):
 def products(request):
     products = Product.objects.all()
     categories = Category.objects.all()
-    return render(request, "eshop/products.html", context={"products": products, "categories": categories})
+    selected_category = request.GET.get('category')  # Récupérer la catégorie sélectionnée
+    return render(request, "eshop/products.html", context={"products": products, "categories": categories, "selected_category": selected_category})
 
 
 @login_required()
