@@ -115,10 +115,11 @@ def product_create_view(request):
     if not request.user.is_authenticated or not request.user.is_employee:
         return HttpResponseForbidden("Vous n'êtes pas autorisé à accéder à cette page.")
     form = ProductCreateForm(request.POST or None, request.FILES or None)
+    categories = Category.objects.all()
     if form.is_valid():
         form.save()
         return redirect('products-list-mng')
-    return render(request, 'eshop/product_create.html', {'form': form})
+    return render(request, 'eshop/product_create.html', {'form': form,"categories": categories})
 
 @login_required()
 def product_update_view(request, slug):
