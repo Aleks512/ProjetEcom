@@ -81,6 +81,11 @@ body, html {
   color: #009042 !important;
 }
 
+.info-custom{
+    background-color: #000000 !important;
+  color: #009042 !important;
+}
+
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
 body, html {
   height: 100%;
@@ -137,9 +142,25 @@ body, html {
 .list-group-item.custom-active.active,
 .list-group-item.custom-active:active,
 .list-group-item.custom-active:focus {
-    background-color: green !important;
-    color: white;
+    background-color: #009042 !important;
+    color:black;
+
+
 }
+/*.list-group-item:hover{*/
+/*  background-color: black;*/
+/*  color:#27b547;*/
+/*}*/
+
+a.categorie {
+  color: black;  /* Couleur de texte souhaitée */
+  text-decoration: none;  /* Supprime le soulignement */
+}
+
+/*a.categorie:hover {*/
+/*  color: darkgreen;  !* Couleur de texte au survol *!*/
+/*}*/
+
 
 /*.product-card {*/
 /*  width: 100%;*/

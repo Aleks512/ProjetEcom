@@ -39,6 +39,9 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+    def price_for_1000_units(self):
+        return self.unit_price * Decimal(1000)
+
 
     def get_absolute_url(self):
         return reverse("product", kwargs={"slug":self.slug})

@@ -15,9 +15,9 @@
               <tr>
                 <th>Société</th>
                 <th>Commande</th>
-                <th>Produit</th>
-                <th>Prix unitaire</th>
-                <th>Quantité</th>
+                <th>Prenom</th>
+                <th>Nom de famille</th>
+                <th>Email</th>
                 <th>Total</th>
                 <th>Statut</th>
               </tr>
@@ -41,7 +41,7 @@
                       <td>En attente</td>
                     {% endif %}
                     <td>
-                      <a href="{% url 'consultant-order-update' item.id %}" class="btn btn-warning" style="background-color: #009042;">
+                      <a href="{% url 'consultant-order-update' item.id %}" class="btn custom-btn " >
                         <i class="bi bi-pencil-fill me-2"></i>Editer
                       </a>
                     </td>

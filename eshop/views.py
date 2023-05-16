@@ -107,6 +107,7 @@ def products_list_mng(request):
 
 def product_detail(request, slug):
     product = get_object_or_404(Product, slug=slug)
+
     return render(request, "eshop/product_detail.html", context={"product":product})
 
 @login_required()
@@ -195,7 +196,7 @@ def checkout(request):
     return redirect(reverse('products'))
 
 
-# Vue pour la mise à jour de la commande par le consultant
+# Order to be updated by consultant
 class OrderUpdateConsultantView(LoginRequiredMixin, UpdateView):
     model = Order
     fields = ['ordered', 'commentaire']

@@ -28,7 +28,7 @@
                   <div class="card mb-4 shadow-sm">
                       <div class="card-body" style="font-family: 'Lato', sans-serif; color: #777;">
                           <h4 class="card-title">{{ category.name }}</h4>
-                          <a href="{% url 'product_list_by_category' category.slug %}" class="btn btn-success">Voir les produits</a>
+                          <a href="{% url 'product_list_by_category' category.slug %}" class="btn btn-success custom-btn">Voir les produits</a>
                           <a href="{% url 'category-update' category.slug %}" class="btn btn-secondary">Modifier</a>
                           <a href="{% url 'category-delete' category.slug %}" class="btn btn-danger">Supprimer</a>
                       </div>

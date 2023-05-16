@@ -59,7 +59,15 @@ body, html {
 <!-- Bienvenue parallax -->
 <div class="bgimg-1 w3-display-container w3-opacity-min" id="home">
   <div class="w3-display-middle" style="white-space:nowrap;">
-    <span class="w3-center w3-padding-large w3-black w3-xlarge w3-wide w3-animate-opacity"><span class="w3-hide-small">BIENVENUE</span> CHEZ VENTALIS</span>
+    <span class="w3-center w3-padding-large w3-black w3-xlarge w3-wide w3-animate-opacity">
+        BIENVENUE  CHEZ VENTALIS
+        <span class="w3-hide-small">
+            {% if user.is_authenticated and user.is_employee  %}
+            <p>Consultant {{user.first_name}} {{user.first_name}}</p>{% endif %}
+            {% if user.is_authenticated and user.customer %} <p>{{user.first_name}} {{user.first_name}}
+            Votre consultant est <span class="info-custom">{{user.customer.consultant_applied.email}}</span> </p>{% endif %}</span>
+       </span>
+
   </div>
 </div>
 
