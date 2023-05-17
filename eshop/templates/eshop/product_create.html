@@ -10,86 +10,19 @@
           <h4 class="text-center">Créer un nouveau produit</h4>
         </div>
         <div class="card-body">
-          <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="form-group">
-              <label for="id_name">Nom du produit</label>
-              <input type="text" class="form-control form-control-lg{% if form.name.errors %} is-invalid{% endif %}" id="id_name" name="name" placeholder="Nom du produit">
-              {% if form.name.errors %}
-                <div class="invalid-feedback">
-                  {% for error in form.name.errors %}
-                    {{ error }}
-                  {% endfor %}
-                </div>
-              {% endif %}
-            </div>
-            <div class="form-group">
-              <label for="id_description">Description</label>
-              <textarea class="form-control form-control-lg{% if form.description.errors %} is-invalid{% endif %}" id="id_description" name="description" placeholder="Description"></textarea>
-              {% if form.description.errors %}
-                <div class="invalid-feedback">
-                  {% for error in form.description.errors %}
-                    {{ error }}
-                  {% endfor %}
-                </div>
-              {% endif %}
-            </div>
-            <div class="form-group">
-              <label for="id_unit_price">Prix unitaire</label>
-              <input type="text" class="form-control form-control-lg{% if form.unit_price.errors %} is-invalid{% endif %}" id="id_unit_price" name="unit_price" placeholder="Prix unitaire">
-              {% if form.unit_price.errors %}
-                <div class="invalid-feedback">
-                  {% for error in form.unit_price.errors %}
-                    {{ error }}
-                  {% endfor %}
-                </div>
-              {% endif %}
-            </div>
-            <div class="form-group">
-              <label for="id_stock">Stock</label>
-              <input type="text" class="form-control form-control-lg{% if form.stock.errors %} is-invalid{% endif %}" id="id_stock" name="stock" placeholder="Stock">
-              {% if form.stock.errors %}
-                <div class="invalid-feedback">
-                  {% for error in form.stock.errors %}
-                    {{ error }}
-                  {% endfor %}
-                </div>
-              {% endif %}
-            </div>
-            <div class="form-group">
-              <label for="id_category">Catégorie</label>
-              <select class="form-select form-control-lg{% if form.category.errors %} is-invalid{% endif %}" id="id_category" name="category">
-                <option value="">Sélectionnez une catégorie</option>
-                {% for category in categories %}
-                  <option value="{{ category }}">{{ category }}</option>
-                {% endfor %}
-              </select>
-              {% if form.category.errors %}
-                <div class="invalid-feedback">
-                  {% for error in form.category.errors %}
-                    {{ error }}
-                  {% endfor %}
-                </div>
-              {% endif %}
-            </div>
-            <div class="form-group">
-              <label for="id_image">Image</label>
-              <input type="file" class="form
-            </div>
-          </form>
+<form method="post">
+  {% csrf_token %}
+  {{ form.name.label }}: {{ form.name }}
+  {{ form.description.label }}: {{ form.description }}
+  {{ form.unit_price.label }}: {{ form.unit_price }}
+  {{ form.stock.label }}: {{ form.stock }}
+  {{ form.category.label }}: {{ form.category }}
+  {{ form.image.label }}: {{ form.image }}
+  <input type="submit" value="Enregistrer">
+</form>
         </div>
-        </div>
-       </div>
-
-
-
-
-
-
-
-
-
-
-
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
-

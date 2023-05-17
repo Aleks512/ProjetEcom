@@ -18,32 +18,6 @@ from .forms import OrderForm, CommentForm
 
 
 
-class OrderDetailView(DetailView):
-    model = Order
-    template_name = 'eshop/order_detail.html'
-    context_object_name = 'order'
-
-class OrderCustomerUpdateView(UpdateView):
-  model= Order
-  template_name= "eshop/order_update.html"
-  fields = ('product', 'quantity',)
-
-  def get_success_url(self):
-      return '/cart'
-
-# class OrderConsultantUpdateView(UpdateView):
-#   model = Order
-#   template_name = "eshop/order_consultant_update.html"
-#   fields = '__all__'
-#
-#   def get_success_url(self):
-#       return '/'
-class OrderDeleteView(DeleteView):
-    model = Order
-    template_name = "eshop/order_delete.html"
-    fields = '__all__'
-    def get_success_url(self):
-        return '/cart'
 
 
 def category_list(request):
@@ -196,6 +170,21 @@ def checkout(request):
     messages.success(request, 'Votre commande a été passée avec succès. Merci!')
     return redirect(reverse('products'))
 
+class OrderCustomerUpdateView(UpdateView):
+  model= Order
+  template_name= "eshop/order_update.html"
+  fields = ('product', 'quantity',)
+
+  def get_success_url(self):
+      return '/cart'
+
+class OrderDeleteView(DeleteView):
+    model = Order
+    template_name = "eshop/order_delete.html"
+    fields = '__all__'
+    def get_success_url(self):
+        return '/cart'
+
 
 # Order to be updated by consultant
 class OrderUpdateConsultantView(LoginRequiredMixin, UpdateView):
@@ -210,11 +199,6 @@ class OrderUpdateConsultantView(LoginRequiredMixin, UpdateView):
         # Récupération de l'objet Order à mettre à jour
         order = self.get_object()
 
-        # # Si la commande est déjà traitée, on affiche un message d'erreur
-        # if order.ordered:
-        #     messages.error(self.request, "Cette commande est déjà traitée.")
-        #     return self.form_invalid(form)
-
         # Mise à jour de l'objet Order et sauvegarde en base de données
         response = super().form_valid(form)
 
@@ -227,9 +211,13 @@ class OrderUpdateConsultantView(LoginRequiredMixin, UpdateView):
 
         # Message de confirmation
         messages.success(self.request, "La commande a été mise à jour avec succès.")
-
         return response
 
+
+class OrderDetailView(DetailView):
+    model = Order
+    template_name = 'eshop/order_detail.html'
+    context_object_name = 'order'
 
 
 

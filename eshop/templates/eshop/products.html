@@ -3,7 +3,7 @@
 
 {% block content %}
     {% if messages %}
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <div class="alert alert-warning  alert-dismissible fade show mt-4" role="alert">
             {% for message in messages %}
                 {{ message }}
             {% endfor %}
@@ -11,7 +11,7 @@
         </div>
     {% endif %}
 
-    <div class="container-fluid pt-5 ">
+    <div class="container-fluid mt-5 ">
         <div class="row">
             <div class="col-sm-2 ">
                 <h2 class="ml-4">Catégories</h2>
@@ -26,8 +26,10 @@
                     {% endfor %}
                 </ul>
             </div>
+
             <div class="col-sm-10">
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+
                     {% if selected_category %}
                         {% for product in products %}
                             {% if product.category.slug == selected_category %}
@@ -50,7 +52,9 @@
                             </div>
                         {% endfor %}
                     {% else %}
+
                         {% for product in products %}
+
                             <div class="col">
                                 <div class="card">
                                     {% if product.image %}
@@ -63,6 +67,7 @@
                                     </div>
                                 </div>
                             </div>
+
                         {% empty %}
                             <div class="col">
                                 <p>Nous sommes en rupture de stock pour tous les articles</p>

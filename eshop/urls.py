@@ -11,14 +11,17 @@ urlpatterns = [
     path('cart/delete/', views.cart_delete, name='cart-delete'),
     path('category/list/', views.category_list, name='category-list'), #ok
     path('category/create/', views.category_create_view, name='category-create'),
+
     path('category/<slug:category_slug>/', views.product_list_by_category, name='product_list_by_category'),
+    #path('categories/<slug:category_slug>/', views.product_list_by_category, name='product-list-by-category'),
+
     path('category/<slug:slug>/update/', views.category_update_view, name='category-update'),
     path('category/<slug:slug>/delete/', views.category_delete_view, name='category-delete'),
     #path('products/<slug:category_slug>/', views.product_list, name='product-list'),
     path('product/create/', views.product_create_view, name='product-create'),
     path('product/<slug:slug>/update/', views.product_update_view, name='product-update'),
     path('product/<slug:slug>/delete/', views.product_delete_view, name='product-delete'),
-    path('produits/',views.products, name="products"),
+
 
     # Path pour la mise à jour de la commande
     path('orders/<int:pk>/update/', views.OrderUpdateConsultantView.as_view(), name='consultant-order-update'),#OK
@@ -37,6 +40,6 @@ urlpatterns = [
 
 
     path('categories/', views.category_list, name='category-list'),
-    path('categories/<slug:category_slug>/', views.product_list_by_category, name='product-list-by-category'),
+
 
 ]
