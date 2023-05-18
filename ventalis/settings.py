@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'eshop',
     'bootstrap5',
     'contact',
+    'rest_framework',
+    'api',
 
 
 ]
