@@ -5,7 +5,8 @@ from django.contrib.auth.views import LoginView, LogoutView,PasswordResetView, P
 urlpatterns=[
     path('', views.home, name="home"),
     path('presentation/', views.presentation, name="presentation"),
-    path('login/', LoginView.as_view(template_name='registration/login.html',redirect_authenticated_user=True), name = 'login'),
+    path('login/', views.WebAppLoginView.as_view(template_name='registration/login.html'), name='login'),
+    #path('login/', LoginView.as_view(template_name='registration/login.html',redirect_authenticated_user=True), name = 'login'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path("consultant/add/", views.ConsultantCreateView.as_view(), name="consultant-add"),
     path('consultant/update/<pk>', views.ConsultantUpdate.as_view(), name="consultant-update"),

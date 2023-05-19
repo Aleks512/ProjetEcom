@@ -81,7 +81,7 @@ class Order(models.Model):
         if self.quantity % 1000 != 0:
             raise ValueError("La quantité doit être un multiple de 1000.")
         return self.product.unit_price * (Decimal(self.quantity))
-        #return self.quantity * self.product.unit_price
+
 
 
 class Cart(models.Model):

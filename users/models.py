@@ -48,7 +48,7 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(_("Prénom"), max_length=100)
     last_name = models.CharField(_("Nom de famille"), max_length=50)
     company = models.CharField(_("Société"), max_length=100)
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_client = models.BooleanField(default=False)
     is_employee = models.BooleanField(default=False)

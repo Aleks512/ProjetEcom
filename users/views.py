@@ -1,6 +1,7 @@
+from django.contrib.auth.views import LoginView
 from django.forms import PasswordInput
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import generic
 from django.views.generic import ListView, TemplateView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -14,6 +15,11 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth.mixins import UserPassesTestMixin
 
 
+class WebAppLoginView(LoginView):
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('home')  # Replace 'home' with your desired URL after login
+        return super().get(request, *args, **kwargs)
 
 def home(request):
 
