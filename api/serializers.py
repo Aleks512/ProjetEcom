@@ -31,12 +31,19 @@ class CustomerSerializer(serializers.ModelSerializer):
         model = Customer
         fields = '__all__'
 
+class CommentSerializer(serializers.ModelSerializer):
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    class Meta:
+        model = Comment
+        fields = '__all__'
+
 class OrderSerializer(serializers.ModelSerializer):
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    product = ProductSerializer()  # Champ de sérialiseur imbriqué pour représenter les informations sur le produit
+    comments = CommentSerializer(many=True, read_only=True)
+
     class Meta:
         model = Order
         fields = '__all__'
 
-class CommentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Comment
-        fields = '__all__'
+
