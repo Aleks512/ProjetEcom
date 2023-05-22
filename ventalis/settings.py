@@ -14,25 +14,21 @@ from datetime import timedelta
 from pathlib import Path
 import environ
 
-env = environ.Env()
-environ.Env.read_env()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+env = environ.Env()
+environ.Env.read_env(env_file=str(BASE_DIR / "ventalis" / ".env"))
 
 AUTH_USER_MODEL = 'users.NewUser'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
-
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+SECRET_KEY = env("SECRET_KEY")
+DEBUG = env.bool("DEBUG")
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 
 
 # Application definition
@@ -51,8 +47,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     #'rest_framework.authtoken',
-
-
+    'django_extensions',
 ]
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'#ajouté
 
@@ -152,6 +147,12 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+
+GRAPH_MODELS = {
+  'all_applications': True,
+  'group_models': True,
+}
 
 
 # Static files (CSS, JavaScript, Images)

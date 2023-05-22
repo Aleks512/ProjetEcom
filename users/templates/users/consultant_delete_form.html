@@ -1,20 +1,28 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<div class="container mt-5">
-  <div class="col-md-6 mx-auto">
-    <div class="card">
-      <div class="card-header" style="background-color: #000000; color: #27b547;">
-        <h4>Suppression d'un consultant</h4>
-      </div>
-      <div class="card-body">
-        <form method="post">
-          {% csrf_token %}
-          <p>Etes vous sûr de vouloir supprimer "{{ object.first_name }} {{ object.last_name }}" de notre base ?</p>
-          <button type="submit" class="btn btn-danger">Confirmer</button>
-        </form>
+<div class="container" style="height: 100vh;">
+  <div class="row justify-content-center align-items-center h-100">
+    <div class="col-md-6">
+      <div class="card shadow-lg">
+        <div class="card-header" style="background-color: #000000; color: #27b547;">
+          <h4>Suppression d'un consultant</h4>
+        </div>
+        <div class="card-body">
+          <form method="post">
+            {% csrf_token %}
+            <p>Etes-vous sûr de vouloir supprimer "{{ object.first_name }} {{ object.last_name }}" de notre base ?</p>
+            <button type="submit" class="btn btn-danger">Confirmer</button>
+            <a href="{% url 'consultant-list' %}" class="btn btn-secondary">
+              <i class="bi bi-trash-fill me-2"></i>Annuler
+            </a>
+          </form>
+        </div>
       </div>
     </div>
   </div>
 </div>
 {% endblock %}
+
+
+

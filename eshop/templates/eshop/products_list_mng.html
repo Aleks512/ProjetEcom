@@ -26,9 +26,9 @@
             <div class="card-body">
               <h5 class="card-title">{{ product.name }}</h5>
               <p class="card-text">{{ product.description }}</p>
-              <a href="{{ product.get_absolute_url }}" class="btn btn-primary">Voir l'article</a>
+              <a href="{{ product.get_absolute_url }}" class="btn btn-secondary custom-btn">Voir l'article</a>
 
-              <a href="{% url 'product-update' product.slug %}" class="btn btn-warning" style="background-color: #009042;">
+              <a href="{% url 'product-update' product.slug %}" class="btn btn-secondary >
                 <i class="bi bi-pencil-fill me-2"></i>Editer
               </a>
 
