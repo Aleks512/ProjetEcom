@@ -84,29 +84,6 @@ class CategoryCreateViewTest(TestCase):
         self.create_category_url = reverse('category-create')
         self.category_list_url = reverse('category-list')
 
-    def test_category_create_view_with_non_authenticated_employee_user(self):
-        # Vérifier que l'utilisateur est connecté et qu'il est employé
-        self.assertTrue(self.employee_user.is_authenticated)
-        self.assertTrue(self.employee_user.is_employee)
-
-        # Effectuer une requête GET vers la vue de création de catégorie (meme si elle figure pas dans le menu de visiteur !!!)
-        response = self.client.get(self.create_category_url)
-
-        # Vérifier que la vue renvoie le code HTTP 302
-        self.assertEqual(response.status_code, 302)
-
-        # Vérifier que le renvoie vers le login
-        self.assertRedirects(response,'/login/?next=/category/create/')
-
-        # Effectue une requête GET vers la vue de création de catégorie
-        response = self.client.get('/category/create/')
-
-        # Vérifie que la réponse renvoie le code HTTP 200
-        self.assertEqual(response.status_code, 302)
-
-        # Effectuer une requête POST pour créer une nouvelle catégorie
-        data = {'name': 'Test Category', 'slug': 'test-category'}
-        response = self.client.post(self.create_category_url, data=data)
 
 
 

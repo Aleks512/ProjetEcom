@@ -20,15 +20,16 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = ['name', 'image', 'description', 'unit_price', 'stock']
 
 class ConsultantSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Consultant
         fields = '__all__'
 
 class CustomerSerializer(serializers.ModelSerializer):
-    consultant = ConsultantSerializer()
     class Meta:
         model = Customer
-        fields = '__all__'
+        fields = ['id', 'user_name', 'email', 'first_name', 'last_name', 'company']
+
 
 class CommentSerializer(serializers.ModelSerializer):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
@@ -39,18 +40,28 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class OrderSerializer(serializers.ModelSerializer):
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    product = ProductSerializer()  # Champ de sérialiseur imbriqué pour représenter les informations sur le produit
-    comments = CommentSerializer(many=True, read_only=True)
-
+    user=CustomerSerializer(many=False)
     class Meta:
         model = Order
         fields = '__all__'
 
 class MessageSerializer(serializers.ModelSerializer):
+    sender_first_name = serializers.ReadOnlyField(source='sender.first_name')
+    sender_last_name = serializers.ReadOnlyField(source='sender.last_name')
+    sender_email = serializers.ReadOnlyField(source='sender.email')
+
+    recipient_first_name = serializers.ReadOnlyField(source='recipient.first_name')
+    recipient_last_name = serializers.ReadOnlyField(source='recipient.last_name')
+    recipient_email = serializers.ReadOnlyField(source='recipient.email')
+
     class Meta:
         model = Message
-        fields = ['id', 'sender', 'recipient', 'content', 'timestamp']
-        read_only_fields = ['id', 'sender', 'timestamp', 'recipient']
+        fields = ['id', 'sender', 'recipient', 'content', 'timestamp',
+                  'sender_first_name', 'sender_last_name', 'sender_email',
+                  'recipient_first_name', 'recipient_last_name', 'recipient_email']
+        read_only_fields = ['id', 'sender', 'timestamp', 'recipient',
+                            'sender_first_name', 'sender_last_name', 'sender_email',
+                            'recipient_first_name', 'recipient_last_name', 'recipient_email']
+
 
 
