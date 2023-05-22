@@ -39,13 +39,5 @@ class CommentCreateAPIView(generics.CreateAPIView):
         order = Order.objects.get(id=order_id)
         serializer.save(consultant=self.request.user, order=order)
 
-class MessageCreateAPIView(generics.CreateAPIView):
-    queryset = Message.objects.all()
-    serializer_class = MessageSerializer
-    permission_classes = [IsAuthenticated]
 
-    def perform_create(self, serializer):
-        recipient_id = self.request.data.get('recipient_id')
-        recipient = Order.objects.get(id=recipient_id).user
-        serializer.save(sender=self.request.user, recipient=recipient)
 
