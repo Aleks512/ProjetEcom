@@ -24,7 +24,7 @@ from ventalis import settings
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('company-admin/', admin.site.urls),
     path('', include("users.urls")),
     path('', include("eshop.urls")),
     path('', include('contact.urls')),

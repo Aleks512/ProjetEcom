@@ -63,8 +63,8 @@ body, html {
         BIENVENUE  CHEZ VENTALIS
         <span class="w3-hide-small">
             {% if user.is_authenticated and user.is_employee  %}
-            <p>Consultant {{user.first_name}} {{user.first_name}}</p>{% endif %}
-            {% if user.is_authenticated and user.customer %} <p>{{user.first_name}} {{user.first_name}}
+            <p>Consultant {{user.first_name}} {{user.last_name}}</p>{% endif %}
+            {% if user.is_authenticated and user.customer %} <p>{{user.first_name}} {{user.last_name}}
             Votre consultant est <span class="info-custom">{{user.customer.consultant_applied.email}}</span> </p>{% endif %}</span>
        </span>
 

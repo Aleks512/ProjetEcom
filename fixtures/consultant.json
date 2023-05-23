@@ -1,0 +1,30 @@
+[
+{
+    "model": "users.consultant",
+    "pk": 60,
+    "fields": {
+        "matricule": "RNFB3"
+    }
+},
+{
+    "model": "users.consultant",
+    "pk": 61,
+    "fields": {
+        "matricule": "BS769"
+    }
+},
+{
+    "model": "users.consultant",
+    "pk": 62,
+    "fields": {
+        "matricule": "7IZY3"
+    }
+},
+{
+    "model": "users.consultant",
+    "pk": 71,
+    "fields": {
+        "matricule": "WCOF3"
+    }
+}
+]

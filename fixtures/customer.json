@@ -1,0 +1,58 @@
+[
+{
+    "model": "users.customer",
+    "pk": 63,
+    "fields": {
+        "consultant_applied": 60
+    }
+},
+{
+    "model": "users.customer",
+    "pk": 64,
+    "fields": {
+        "consultant_applied": 61
+    }
+},
+{
+    "model": "users.customer",
+    "pk": 65,
+    "fields": {
+        "consultant_applied": 62
+    }
+},
+{
+    "model": "users.customer",
+    "pk": 66,
+    "fields": {
+        "consultant_applied": 60
+    }
+},
+{
+    "model": "users.customer",
+    "pk": 67,
+    "fields": {
+        "consultant_applied": 61
+    }
+},
+{
+    "model": "users.customer",
+    "pk": 68,
+    "fields": {
+        "consultant_applied": 62
+    }
+},
+{
+    "model": "users.customer",
+    "pk": 69,
+    "fields": {
+        "consultant_applied": 60
+    }
+},
+{
+    "model": "users.customer",
+    "pk": 70,
+    "fields": {
+        "consultant_applied": 61
+    }
+}
+]

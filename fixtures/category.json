@@ -1,0 +1,58 @@
+[
+{
+    "model": "eshop.category",
+    "pk": 1,
+    "fields": {
+        "name": "Vêtements personnalisés",
+        "slug": "vetements-personnalises"
+    }
+},
+{
+    "model": "eshop.category",
+    "pk": 2,
+    "fields": {
+        "name": "Articles de papeterie personnalisés",
+        "slug": "articles-de-papeterie-personnalises"
+    }
+},
+{
+    "model": "eshop.category",
+    "pk": 3,
+    "fields": {
+        "name": "Sac personnalisé",
+        "slug": "sac-personnalise"
+    }
+},
+{
+    "model": "eshop.category",
+    "pk": 4,
+    "fields": {
+        "name": "Articles de verrerie personnalisés",
+        "slug": "articles-de-verrerie-personnalises"
+    }
+},
+{
+    "model": "eshop.category",
+    "pk": 7,
+    "fields": {
+        "name": "Signalétique intérieure",
+        "slug": "signaletique-interieure"
+    }
+},
+{
+    "model": "eshop.category",
+    "pk": 8,
+    "fields": {
+        "name": "Étiquettes personnalisée",
+        "slug": "etiquettes-personnalisee"
+    }
+},
+{
+    "model": "eshop.category",
+    "pk": 39,
+    "fields": {
+        "name": "Signalétique exterieure",
+        "slug": "signaletique-exterieure"
+    }
+}
+]

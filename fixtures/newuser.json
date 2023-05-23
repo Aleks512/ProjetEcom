@@ -1,0 +1,275 @@
+[
+{
+    "model": "users.newuser",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$ilKUsxj3v6F9A6m7mpHoM0$2iL/ZEj1YuEAvH495OS57FHpctk/LlaXYWS/zs1udPQ=",
+        "last_login": "2023-05-22T22:20:02.168Z",
+        "user_name": "Administrateur",
+        "email": "alek@mail.com",
+        "first_name": "",
+        "last_name": "",
+        "company": "Ventalis",
+        "is_active": true,
+        "is_staff": true,
+        "is_client": false,
+        "is_employee": false,
+        "is_superuser": true,
+        "date_joined": "2023-04-21T07:12:30.523Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.newuser",
+    "pk": 60,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$1OBXsmvl6PPP2e3EjDYGOL$Gql/zwB+jjFZnkBabCDib2abB6RC/Ml0M+RRUBfnMms=",
+        "last_login": "2023-05-22T22:18:26.464Z",
+        "user_name": "John1",
+        "email": "johnsmith@ventalis.com",
+        "first_name": "John",
+        "last_name": "Smith",
+        "company": "Ventalis",
+        "is_active": true,
+        "is_staff": true,
+        "is_client": false,
+        "is_employee": true,
+        "is_superuser": false,
+        "date_joined": "2023-05-10T16:43:06.063Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.newuser",
+    "pk": 61,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$DJpfvknQTVx0aOwzMxJnmt$/Heb+FKYIb2PbOHDp5Q4KoJwER579lJMbjpy96wLZx0=",
+        "last_login": "2023-05-22T12:22:44.437Z",
+        "user_name": "Aleksa",
+        "email": "aleksa@ventalis.com",
+        "first_name": "Aleksandra",
+        "last_name": "Cichocka",
+        "company": "pwc",
+        "is_active": true,
+        "is_staff": true,
+        "is_client": false,
+        "is_employee": true,
+        "is_superuser": false,
+        "date_joined": "2023-05-10T16:44:02.382Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.newuser",
+    "pk": 62,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$Dstqk6tXo0HMg2j3ULt7sN$HoDZQi27OCA00sg4RJSMqHQ6/QlhWNIkviupsZgAhME=",
+        "last_login": "2023-05-22T22:18:51.765Z",
+        "user_name": "Natan",
+        "email": "natan@ventalis.com",
+        "first_name": "Natanael",
+        "last_name": "Koscicki",
+        "company": "Ventalis",
+        "is_active": true,
+        "is_staff": true,
+        "is_client": false,
+        "is_employee": true,
+        "is_superuser": false,
+        "date_joined": "2023-05-10T16:45:20.312Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.newuser",
+    "pk": 63,
+    "fields": {
+        "password": "Azerty&1",
+        "last_login": "2023-05-10T18:25:58Z",
+        "user_name": "Krikri",
+        "email": "kristoto@mail.com",
+        "first_name": "Kristina",
+        "last_name": "Tolba",
+        "company": "XYZERU SA",
+        "is_active": true,
+        "is_staff": false,
+        "is_client": true,
+        "is_employee": false,
+        "is_superuser": false,
+        "date_joined": "2023-05-10T17:02:55Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.newuser",
+    "pk": 64,
+    "fields": {
+        "password": "Azerty&1",
+        "last_login": "2023-05-11T07:01:05Z",
+        "user_name": "Stefa",
+        "email": "stefakwiatkowska@mail.com",
+        "first_name": "Stefania",
+        "last_name": "Kwiatkowska",
+        "company": "Kwiaty Zoo",
+        "is_active": true,
+        "is_staff": false,
+        "is_client": true,
+        "is_employee": false,
+        "is_superuser": false,
+        "date_joined": "2023-05-11T06:58:39Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.newuser",
+    "pk": 65,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$0fC6GKkYcod28gn376PrgJ$/fILo2JIEICE/l5bXUexUo83C9c6xB6TO1lTwdqJeic=",
+        "last_login": "2023-05-11T15:09:30Z",
+        "user_name": "Client1",
+        "email": "client1@mail.com",
+        "first_name": "Prenom_c1",
+        "last_name": "Nom_c2",
+        "company": "abc1",
+        "is_active": true,
+        "is_staff": false,
+        "is_client": true,
+        "is_employee": false,
+        "is_superuser": false,
+        "date_joined": "2023-05-11T15:09:11Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.newuser",
+    "pk": 66,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$pqlyiwQWyZg0hDulorzpmI$78AscqpK861Tzhkq0CJXg619fntz1xCmOE1+hJSnq/Q=",
+        "last_login": "2023-05-13T07:29:21Z",
+        "user_name": "Client2",
+        "email": "client2@mail.com",
+        "first_name": "Prenom_c2",
+        "last_name": "Nom-c",
+        "company": "ABC2",
+        "is_active": true,
+        "is_staff": false,
+        "is_client": true,
+        "is_employee": false,
+        "is_superuser": false,
+        "date_joined": "2023-05-11T15:13:17Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.newuser",
+    "pk": 67,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$20rqCSqyECSdAriwbjeQrM$QoAMas0H3tOnmDCGVcoZ/+FL7Y58zY4uZH7CnGUQ+/g=",
+        "last_login": "2023-05-22T07:23:22Z",
+        "user_name": "Client3",
+        "email": "client3@mail.com",
+        "first_name": "Prenom_c3",
+        "last_name": "Nom_c3",
+        "company": "ABC-3",
+        "is_active": true,
+        "is_staff": false,
+        "is_client": true,
+        "is_employee": false,
+        "is_superuser": false,
+        "date_joined": "2023-05-11T15:19:40Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.newuser",
+    "pk": 68,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$w8ICoJGX3eyTfub2PG6RSr$LfYooZuApL7pPioQrjH9lAeCuMWTDFV3Vzpj67LfYt4=",
+        "last_login": "2023-05-15T17:19:12Z",
+        "user_name": "User_client5",
+        "email": "client5@mail.com",
+        "first_name": "client5",
+        "last_name": "Nom_client5",
+        "company": "DYNAMICS",
+        "is_active": true,
+        "is_staff": false,
+        "is_client": true,
+        "is_employee": false,
+        "is_superuser": false,
+        "date_joined": "2023-05-14T21:42:22Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.newuser",
+    "pk": 69,
+    "fields": {
+        "password": "Azerty&1",
+        "last_login": "2023-05-22T20:43:33Z",
+        "user_name": "AleksM",
+        "email": "madame_michou@exemple.com",
+        "first_name": "Madame",
+        "last_name": "Michou",
+        "company": "AZERTY",
+        "is_active": true,
+        "is_staff": false,
+        "is_client": true,
+        "is_employee": false,
+        "is_superuser": false,
+        "date_joined": "2023-05-14T23:11:32Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.newuser",
+    "pk": 70,
+    "fields": {
+        "password": "Azerty&1",
+        "last_login": "2023-05-15T19:40:10Z",
+        "user_name": "AleksH",
+        "email": "aleksa.dupont@exemple.fr",
+        "first_name": "Aleksa",
+        "last_name": "Dupont",
+        "company": "DEFC",
+        "is_active": true,
+        "is_staff": false,
+        "is_client": true,
+        "is_employee": false,
+        "is_superuser": false,
+        "date_joined": "2023-05-15T19:40:00Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.newuser",
+    "pk": 71,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$Ji0JQ4jQjj19X4yR0Blunw$/4u4bvOVHwxqZtIiXPgna0N2cDUelJ/HlWr/W0TAACI=",
+        "last_login": null,
+        "user_name": "Fred",
+        "email": "frederic.boclewski@ventalis.com",
+        "first_name": "Frederic",
+        "last_name": "Boclewski",
+        "company": "Ventalis",
+        "is_active": true,
+        "is_staff": true,
+        "is_client": false,
+        "is_employee": true,
+        "is_superuser": false,
+        "date_joined": "2023-05-22T20:27:51.189Z",
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]
