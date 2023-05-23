@@ -8,7 +8,7 @@
         "quantity": 1000,
         "ordered": false,
         "ordered_date": "2023-05-10T17:39:53.889Z",
-        "commentaire": "Desoléée"
+        "commentaire": "DesolÃ©Ã©e"
     }
 },
 {
@@ -44,7 +44,7 @@
         "quantity": 1000,
         "ordered": false,
         "ordered_date": "2023-05-10T18:33:23.046Z",
-        "commentaire": "Votre commande était en doublon. Nous n'oen avons plus."
+        "commentaire": "Votre commande Ã©tait en doublon. Nous n'oen avons plus."
     }
 },
 {

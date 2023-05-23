@@ -3,7 +3,7 @@
     "model": "eshop.category",
     "pk": 1,
     "fields": {
-        "name": "Vêtements personnalisés",
+        "name": "VÃªtements personnalisÃ©s",
         "slug": "vetements-personnalises"
     }
 },
@@ -11,7 +11,7 @@
     "model": "eshop.category",
     "pk": 2,
     "fields": {
-        "name": "Articles de papeterie personnalisés",
+        "name": "Articles de papeterie personnalisÃ©s",
         "slug": "articles-de-papeterie-personnalises"
     }
 },
@@ -19,7 +19,7 @@
     "model": "eshop.category",
     "pk": 3,
     "fields": {
-        "name": "Sac personnalisé",
+        "name": "Sac personnalisÃ©",
         "slug": "sac-personnalise"
     }
 },
@@ -27,7 +27,7 @@
     "model": "eshop.category",
     "pk": 4,
     "fields": {
-        "name": "Articles de verrerie personnalisés",
+        "name": "Articles de verrerie personnalisÃ©s",
         "slug": "articles-de-verrerie-personnalises"
     }
 },
@@ -35,7 +35,7 @@
     "model": "eshop.category",
     "pk": 7,
     "fields": {
-        "name": "Signalétique intérieure",
+        "name": "SignalÃ©tique intÃ©rieure",
         "slug": "signaletique-interieure"
     }
 },
@@ -43,7 +43,7 @@
     "model": "eshop.category",
     "pk": 8,
     "fields": {
-        "name": "Étiquettes personnalisée",
+        "name": "Ã‰tiquettes personnalisÃ©e",
         "slug": "etiquettes-personnalisee"
     }
 },
@@ -51,7 +51,7 @@
     "model": "eshop.category",
     "pk": 39,
     "fields": {
-        "name": "Signalétique exterieure",
+        "name": "SignalÃ©tique exterieure",
         "slug": "signaletique-exterieure"
     }
 }
