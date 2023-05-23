@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users',
     'eshop',
-    'django-bootstrap5',
+    'bootstrap5',
     'contact',
     'rest_framework',
     'rest_framework_simplejwt',
