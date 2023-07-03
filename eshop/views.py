@@ -80,7 +80,8 @@ def products_list_mng(request):
     return render(request, "eshop/products_list_mng.html", context={"products":products, "categories": categories})
 
 def product_detail(request, slug):
-    product = get_object_or_404(Product, slug=slug)
+    product = get_object_or_404(Product, slug=
+    slug)
 
     return render(request, "eshop/product_detail.html", context={"product":product})
 
