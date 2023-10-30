@@ -166,6 +166,21 @@ a.categorie-plus:hover {
   color: darkgreen !important;  /* Couleur de texte au survol */
 }
 
+.sent-message{
+  background-color: #d4edda;
+  border-radius: 30px;
+  padding: 10px 25px;
+  width: 25%;
+
+}
+
+.received-message{
+  background-color: grey;
+  float: right;
+  padding: 10px 25px;
+  width: 25%;
+}
+
 
 /*.product-card {*/
 /*  width: 100%;*/

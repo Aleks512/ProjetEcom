@@ -2,7 +2,6 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
 from django.http import HttpResponseForbidden
-from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.contrib import messages
 from django.utils import timezone
@@ -10,7 +9,7 @@ from django.views.generic import UpdateView, DeleteView, DetailView
 from eshop.models import Product, Cart, Order, Category
 from .forms import CategoryCreateForm, CategoryUpdateForm, CategoryDeleteForm, ProductCreateForm, ProductUpdateForm, \
     ProductDeleteForm
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import View
 from .models import Order, Comment
 from .forms import OrderForm, CommentForm
@@ -80,8 +79,7 @@ def products_list_mng(request):
     return render(request, "eshop/products_list_mng.html", context={"products":products, "categories": categories})
 
 def product_detail(request, slug):
-    product = get_object_or_404(Product, slug=
-    slug)
+    product = get_object_or_404(Product, slug=slug)
 
     return render(request, "eshop/product_detail.html", context={"product":product})
 
@@ -143,9 +141,10 @@ def add_to_cart(request, slug):
     messages.success(request, f"{product.name} a été ajouté à votre panier.")
     return redirect(reverse("product", kwargs={'slug': slug}))
 
-
 def cart(request):
-    cart = get_object_or_404(Cart, user=request.user.customer)
+    if not request.user.is_authenticated or not request.user.is_client:
+        return HttpResponseForbidden("Vous n'êtes pas autorisé à accéder à cette page.")
+    cart = get_object_or_404(Cart, user=request.user)
     orders = cart.orders.all()
     total_price = 0
     for order in orders:

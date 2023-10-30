@@ -1,5 +1,6 @@
 from django.contrib.auth.views import LoginView
 from django.forms import PasswordInput
+from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views import generic

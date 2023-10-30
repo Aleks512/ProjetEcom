@@ -29,4 +29,5 @@ urlpatterns = [
     path('', include("eshop.urls")),
     path('', include('contact.urls')),
     path('api/', include('api.urls')),
+    path('', include('messagerie.urls')),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

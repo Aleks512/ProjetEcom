@@ -42,15 +42,17 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users',
     'eshop',
+    'crispy_forms',
     'bootstrap5',
     'contact',
+    'messagerie',
     'rest_framework',
     'rest_framework_simplejwt',
     #'rest_framework.authtoken',
     'django_extensions',
 ]
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'#ajouté
-
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

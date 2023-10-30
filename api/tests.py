@@ -1,4 +1,4 @@
-from django.test import TestCase
+from django.test import TestCase, SimpleTestCase
 from rest_framework.test import APIClient
 from rest_framework import status
 from django.contrib.auth import get_user_model
@@ -38,6 +38,8 @@ class CustomerSendMessageAPIViewTestCase(TestCase):
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
+
+
     def test_create_message(self):
         url = '/api/customer/messages/send/'
         data = {
@@ -49,4 +51,11 @@ class CustomerSendMessageAPIViewTestCase(TestCase):
         self.assertEqual(response.data['sender'], self.customer.id)
         self.assertEqual(response.data['recipient'], self.consultant.id)
         self.assertEqual(response.data['content'], 'Test message')
+
+class TestView(SimpleTestCase):
+    def test_get_products(self):
+        client = APIClient
+        res = client.get('/api/orders/')
+        self.assertEqual(res.status_code, 200)
+
 

@@ -3,6 +3,8 @@ from django.urls import reverse_lazy
 from django.views.generic import FormView, TemplateView
 from django.core.exceptions import ValidationError
 
+from django.contrib import messages
+
 
 from contact.forms import ContactForm
 
